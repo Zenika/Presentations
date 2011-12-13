@@ -1,0 +1,64 @@
+_IDOBJ;NOM_COMPLET;THEME;LIBTHEME;CATEGORIE;LIBCATEGORIE;TYPE;LIBTYPE;STATUT;COMMUNE;ADRESSE;TELEPHONE;WEB;CODE_POSTAL;LONG_WGS84;LAT_WGS84
+288;Parking ouvrage Graslin;10;DEPLACEMENT;1001;Parking;;;;NANTES;Rue Scribe;02 40 73 08 15;www.nge-nantes.fr;44000;-1.562571816;47.21431021
+280;Parking ouvrage Gare Nord;10;DEPLACEMENT;1001;Parking;;;;NANTES;Boulevard de Stalingrad;02 40 74 23 05;www.nge-nantes.fr;44000;-1.544984334;47.21668904
+677;Parking ouvrage Commerce;10;DEPLACEMENT;1001;Parking;;;;NANTES;Place du Commerce;02 40 48 19 66;www.nge-nantes.fr;44000;-1.55771322;47.21312029
+134;Parking ouvrage Médiathèque;10;DEPLACEMENT;1001;Parking;;;;NANTES;Rue Neuve des Capucins;02 40 69 07 79;www.nge-nantes.fr;44000;-1.562338176;47.21087083
+3800;Parking de la Fourche;10;DEPLACEMENT;1001;Parking;;;;LES-SORINIERES;Rue de Nantes;;;44840;-1.533525919;47.15108371
+1046;Parking ouvrage Talensac;10;DEPLACEMENT;1001;Parking;;;;NANTES;Rue Le Nôtre;02 40 89 26 50;www.nge-nantes.fr;44000;-1.5583573;47.22025598
+1044;Parking ouvrage Cité des Congrès;10;DEPLACEMENT;1001;Parking;;;;NANTES;Avenue Jean Claude Bonduelle;02 40 48 78 64;www.nge-nantes.fr;44000;-1.543971277;47.21290167
+1043;Parking ouvrage Aristide Briand;10;DEPLACEMENT;1001;Parking;;;;NANTES;Place Aristide Briand;02 40 47 06 05;;44000;-1.562936418;47.2170936
+1045;Parking ouvrage Gare Sud;10;DEPLACEMENT;1001;Parking;;;;NANTES;32 Rue de Cornulier;02 40 08 15 28;;44000;-1.541036828;47.21614964
+299;Parking ouvrage Tour Bretagne;10;DEPLACEMENT;1001;Parking;;;;NANTES;4 Place de Bretagne;02 40 47 92 14;www.nge-nantes.fr;44000;-1.558201639;47.21773942
+284;Parking ouvrage Decré-Bouffay;10;DEPLACEMENT;1001;Parking;;;;NANTES;18 Rue du Moulin;02 40 47 69 30;;44000;-1.554004632;47.21666262
+3951;Parking ouvrage Les Machines;10;DEPLACEMENT;1001;Parking;;;;NANTES;Rue Arthur III;;;44200;-1.562727792;47.20590062
+3950;Parking Enclos Courte Durée Gare Nord;10;DEPLACEMENT;1001;Parking;;;;NANTES;Boulevard de Stalingrad;;;44000;-1.543478751;47.21726473
+3990;Parking Viviani;10;DEPLACEMENT;1001;Parking;;;;NANTES;Rue René Viviani;;;44200;-1.53619707;47.2087756
+3989;Parking Gare Sud 4;10;DEPLACEMENT;1001;Parking;;;;NANTES;Mail Pablo Picasso;;;44000;-1.537545043;47.21520993
+3652;Parking ouvrage Cathédrale;10;DEPLACEMENT;1001;Parking;;;;NANTES;Rue Sully;;;44000;-1.551056168;47.22081335
+3651;Parking enclos CHU;10;DEPLACEMENT;1001;Parking;;;;NANTES;Quai de Tourville;;;44000;-1.557250234;47.20936197
+3650;Parking enclos Bellamy;10;DEPLACEMENT;1001;Parking;;;;NANTES;Impasse de la Courtine;;;44000;-1.557693693;47.22236042
+3590;Parking Enclos Gare limité 1h;10;DEPLACEMENT;1001;Parking;;;;NANTES;Quai de Malakoff;;;44000;-1.542675139;47.21520212
+3589;Parking enclos Gare Sud 2;10;DEPLACEMENT;1001;Parking;;;;NANTES;Quai de Malakoff;;;44000;-1.541343376;47.21423404
+3555;Parking enclos Gare Sud 3;10;DEPLACEMENT;1001;Parking;;;;NANTES;Rue Marcel Paul;;;44000;-1.537894828;47.21613586
+3554;Parking enclos Château;10;DEPLACEMENT;1001;Parking;;;;NANTES;Rue Henri IV;;;44000;-1.54785045;47.21698996
+3551;Parking enclos Baco-LU;10;DEPLACEMENT;1001;Parking;;;;NANTES;Allée Baco;;;44000;-1.549872883;47.21385525
+3550;Parking enclos Hôtel Dieu;10;DEPLACEMENT;1001;Parking;;;;NANTES;Chaussée de la Madeleine;;;44000;-1.551983112;47.21105709
+3549;Parking enclos Feydeau;10;DEPLACEMENT;1001;Parking;;;;NANTES;Allée de l'Ile Gloriette;;;44000;-1.55843873;47.21117966
+3655;Parking relais Maraîchers;10;DEPLACEMENT;1002;Parking relais;;;;VERTOU;Rue de la Grand' Maison;;;44120;-1.510859656;47.18530279
+3630;Parking relais busway Chapeau Verni;10;DEPLACEMENT;1002;Parking relais;;;;VERTOU;Route de Clisson;;;44230;-1.511298892;47.18953008
+3629;Parking relais busway Bourdonnières;10;DEPLACEMENT;1002;Parking relais;;;;NANTES;Boulevard de Vendée;;;44200;-1.521154295;47.18625559
+3628;Parking relais busway Gréneraie;10;DEPLACEMENT;1002;Parking relais;;;;NANTES;Boulevard Emile Gabory;;;44200;-1.533333623;47.20013904
+3627;Parking relais busway Porte de Vertou;10;DEPLACEMENT;1002;Parking relais;;;;VERTOU;Boulevard Auguste Priou;;;44120;-1.505160178;47.1801753
+1341;Parking relais tram Recteur Schmitt;10;DEPLACEMENT;1002;Parking relais;;;;NANTES;Rue Recteur Schmitt;;www.tan.fr;44300;-1.552903104;47.25173525
+3776;Parking relais tram Marcel Paul;10;DEPLACEMENT;1002;Parking relais;;;;ST-HERBLAIN;Boulevard Marcel Paul;;;44800;-1.61800835;47.24590457
+3586;Parking relais tram Beauséjour;10;DEPLACEMENT;1002;Parking relais;;;;NANTES;142 Route de Vannes;;;44100;-1.587343749;47.23841352
+3649;Parking relais tram Bignon;10;DEPLACEMENT;1002;Parking relais;;;;ORVAULT;Rue des Verts Prés;;;44700;-1.598200225;47.24897525
+3648;Parking relais TER Gare de Pont-Rousseau;10;DEPLACEMENT;1002;Parking relais;;;;REZE;Avenue de la Libération;;;44400;-1.548190272;47.192801
+3777;Parking relais Grande Ouche;10;DEPLACEMENT;1002;Parking relais;;;;BOUGUENAIS;Impasse de la Boisselée;;;44340;-1.579472035;47.18199484
+3778;Parking relais busway Bourdonnières Ouest;10;DEPLACEMENT;1002;Parking relais;;;;NANTES;Rue des Bourdonnières;;;44200;-1.523151332;47.18672424
+3584;Parking relais tram Orvault Morlière;10;DEPLACEMENT;1002;Parking relais;;;;ORVAULT;Avenue de la Morlière;;;44700;-1.603049467;47.24677665
+3582;Parking relais Trentemoult;10;DEPLACEMENT;1002;Parking relais;;;;REZE;Rue Ordronneau;;;44400;-1.580687686;47.19196499
+3566;Parking relais TER Gare de Bouaye;10;DEPLACEMENT;1002;Parking relais;;;;BOUAYE;Allée Louis Armand;;;44830;-1.682099253;47.13833972
+3565;Parking relais TER Gare de Mauves-sur-Loire;10;DEPLACEMENT;1002;Parking relais;;;;MAUVES-SUR-LOIRE;Place de la Gare;;;44470;-1.388904887;47.29325833
+3564;Parking relais TER Gare de Thouaré-sur-Loire;10;DEPLACEMENT;1002;Parking relais;;;;THOUARE-SUR-LOIRE;Rue des Ponts;;;44470;-1.441389354;47.26471199
+3562;Parking relais tram Neustrie;10;DEPLACEMENT;1002;Parking relais;;;;BOUGUENAIS;Chemin de la Neustrie;;;44340;-1.593272351;47.17569331
+3561;Parking relais Gare de Basse-Indre - Saint-Herblain;10;DEPLACEMENT;1002;Parking relais;;;;ST-HERBLAIN;Rue de la Gare;;;44800;-1.661038096;47.20415797
+3560;Parking relaisTrentemoult Roquios;10;DEPLACEMENT;1002;Parking relais;;;;REZE;Quai Surcouf;;;44400;-1.577783932;47.19525251
+3558;Parking relais tram Neustrie;10;DEPLACEMENT;1002;Parking relais;;;;BOUGUENAIS;Rue de la Neustrie;;;44340;-1.593399696;47.17667245
+3556;Parking relais TER Gare de Couëron;10;DEPLACEMENT;1002;Parking relais;;;;COUERON;Rue de la Gare;;;44220;-1.72363737;47.2217772
+3552;Parking relais TER Gare des Pas Enchantés;10;DEPLACEMENT;1002;Parking relais;;;;ST-SEBASTIEN;Rue de la Loire;;;44230;-1.512996443;47.20822905
+3227;Parking relais tram Plaisance;10;DEPLACEMENT;1002;Parking relais;;;;ST-HERBLAIN;Route de Vannes;;;44800;-1.593440524;47.24053266
+3202;Parking relais TER Gare de Vertou Sud;10;DEPLACEMENT;1002;Parking relais;;;;VERTOU;Rue du Bois Rigaud;;;44120;-1.47860857;47.18574981
+3201;Parking relais TER Gare de Vertou Nord;10;DEPLACEMENT;1002;Parking relais;;;;VERTOU;Impasse de la Gare;;;44120;-1.479161855;47.18640238
+3200;Parc relais TER Frêne Rond;10;DEPLACEMENT;1002;Parking relais;;;;ST-SEBASTIEN;Rue de l'Ouche Quinet;;;44230;-1.496218309;47.19054926
+3198;Parking relais tram Goudy;10;DEPLACEMENT;1002;Parking relais;;;;NANTES;Rue Gabriel Goudy;;www.tan.fr;44200;-1.541047747;47.19609895
+3197;Parking relais tram Pirmil;10;DEPLACEMENT;1002;Parking relais;;;;NANTES;Rue Esnoult des Châtelets;;www.tan.fr;44200;-1.541533595;47.19735868
+3196;Parking relais tram René Cassin;10;DEPLACEMENT;1002;Parking relais;;;;NANTES;Route de la Chapelle Sur Erdre;;www.tan.fr;44300;-1.574997908;47.26395093
+3195;Parking relais tram Trocardière;10;DEPLACEMENT;1002;Parking relais;;;;REZE;Avenue Léon Blum;;www.tan.fr;44400;-1.571095589;47.18329275
+3194;Parking relais tram 8 Mai;10;DEPLACEMENT;1002;Parking relais;;;;REZE;Avenue André Malraux;;www.tan.fr;44400;-1.551691452;47.19017791
+3192;Parking relais tram La Beaujoire;10;DEPLACEMENT;1002;Parking relais;;;;NANTES;Rue Colette;;www.tan.fr;44300;-1.527398471;47.2594833
+3191;Parking relais tram Recteur Schmitt;10;DEPLACEMENT;1002;Parking relais;;;;NANTES;Rue Recteur Schmitt;;www.tan.fr;44300;-1.552470385;47.2520277
+3190;Parking relais Tram François Mitterrand;10;DEPLACEMENT;1002;Parking relais;;;;ST-HERBLAIN;Rue Virginia Woolf;;www.tan.fr;44800;-1.639484143;47.2217062
+3189;Parking relais tram Le Cardo;10;DEPLACEMENT;1002;Parking relais;;;;ORVAULT;Esplanade du Cardo;;www.tan.fr;44700;-1.584511981;47.26250209
+3188;Parking relais Tram Frachon;10;DEPLACEMENT;1002;Parking relais;;;;ST-HERBLAIN;Boulevard Salvador Allende;;www.tan.fr;44800;-1.621633362;47.21869614
+3583;Parking relais tram Morlière Paquelais;10;DEPLACEMENT;1002;Parking relais;;;;ORVAULT;50 Avenue de la Paquelais;;;44700;-1.602838747;47.24782352

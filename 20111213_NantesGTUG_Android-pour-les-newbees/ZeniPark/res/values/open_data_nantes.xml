@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="open_data_key">39W9VSNCSASEOGV</string>
+	<string name="open_data_url">http://data.nantes.fr/api/getDisponibiliteParkingsPublics/1.0/%s</string>
+<!-- 	<string name="open_data_url">http://10.0.2.2:9000/api/getDispo/%s</string> -->
+</resources>

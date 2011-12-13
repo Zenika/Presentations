@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.zenika.android.park"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk android:minSdkVersion="7" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+
+    <application
+        android:icon="@drawable/zenika"
+        android:label="@string/app_name" >
+
+        <uses-library android:required="true" android:name="com.google.android.maps"/>
+        
+        <provider android:name=".model.db.ParkContentProvider" android:authorities="com.zenika.provider.zeniparks"/>
+        
+        <activity android:name=".ui.MainActivity" android:theme="@android:style/Theme.NoTitleBar"></activity>
+        <activity android:name="Launcher">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <service android:name=".service.CsvImportService"></service>
+        <service android:name=".service.UpdateParkingService">
+            <intent-filter>
+				<action android:name="com.zenika.android.park.updates.ACTION_START_SERVICE"/>
+            </intent-filter>
+        </service>
+        
+    </application>
+
+</manifest>
