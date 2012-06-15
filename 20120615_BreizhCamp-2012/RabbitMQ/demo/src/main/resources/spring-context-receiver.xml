@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns="http://www.springframework.org/schema/rabbit" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+	xsi:schemaLocation="http://www.springframework.org/schema/rabbit http://www.springframework.org/schema/rabbit/spring-rabbit-1.0.xsd
+	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+
+	<rabbit:connection-factory id="connectionFactory" />
+	<!-- <rabbit:template id="amqpTemplate" connection-factory="connectionFactory" /> -->
+	<rabbit:admin connection-factory="connectionFactory" />
+	
+	<rabbit:queue name="zenika.queue.euronext" />
+	<rabbit:queue name="zenika.queue.nasdaq" />
+
+	<rabbit:listener-container connection-factory="connectionFactory" concurrency="2">
+		<rabbit:listener queues="zenika.queue.euronext" ref="amqpConsumer" />
+		<rabbit:listener queues="zenika.queue.nasdaq" ref="amqpConsumer" />
+	</rabbit:listener-container>
+
+	<beans:bean id="amqpConsumer" class="com.zenika.rabbitmq.demo.SpringAmqpConsumer" />
+
+</beans:beans>
