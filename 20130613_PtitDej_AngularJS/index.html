@@ -1,0 +1,1597 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+
+  <title>P'tit Déj Zenika Lyon - Industrialiser ses développements HTML5 avec AngularJS</title>
+
+  <meta name="description" content="P'tit Déj Zenika Lyon - Industrialiser ses développements HTML5 avec AngularJS">
+  <meta name="author" content="Matthieu Lux">
+
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <link rel="stylesheet" href="css/reveal.min.css">
+  <link rel="stylesheet" href="css/theme/zenika.css" id="theme">
+
+  <!-- For syntax highlighting -->
+  <link rel="stylesheet" href="lib/css/zenburn.css">
+
+  <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+  <!-- <script>
+    document.write('<link rel="stylesheet" href="css/print/' + ( window.location.search.match(/print-pdf/gi) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">');
+  </script> -->
+
+  <link rel="stylesheet" href="css/print/pdf.css" type="text/css" media="print">
+  
+
+  <!--[if lt IE 9]>
+  <script src="lib/js/html5shiv.js"></script>
+  <![endif]-->
+</head>
+
+<body>
+
+<div class="reveal">
+
+<!-- Any section element inside of this container is displayed as a slide -->
+<div class="slides">
+
+
+<section data-state="title">
+  <h2>Industrialiser ses développements HTML5 avec AngularJS</h2>
+
+  <p>
+    <img src="img/AngularJS-Shield-large.png" height="250" class="white"/>
+    <!--<img src="img/logo-zenika.jpg" height="300"/>-->
+  </p>
+</section>
+
+<section>
+  <h2>Matthieu Lux</h2>
+  <ul class="no-bullet">
+    <li>
+      <img src="https://si0.twimg.com/profile_images/821941422/swiip_normal.jpg">
+      <a href="https://twitter.com/Swiip">@Swiip</a>
+    </li>
+    <li>
+      <a href="http://swiip.github.io/">http://swiip.github.io/</a>
+    </li>
+    <!--<li>&nbsp;</li>-->
+    <li>
+      <img src="https://si0.twimg.com/profile_images/1432101890/lyonjs-274_normal.png">
+      <a href="https://twitter.com/LyonJS">@LyonJS</a>
+    </li>
+    <li>
+      <a href="http://lyonjs.org/">http://lyonjs.org/</a>
+    </li>
+    <!--<li>&nbsp;</li>-->
+    <li>
+      <img src="https://si0.twimg.com/profile_images/3755747931/786740e099fc818418214625fd5f331e_normal.jpeg">
+      <a href="http://www.infoq.com/fr/author/Matthieu-Lux">Auteur InfoQ</a>
+    </li>
+    <li>
+      <a href="http://www.infoq.com/fr/">http://www.infoq.com/fr/</a>
+    </li>
+    <li>&nbsp;</li>
+    <li><strong>JavaScript :</strong> AngularJS, jQuery, Grunt, NodeJS...</li>
+    <li><strong>Java :</strong> Spring, Data, MVC, Integration</li>
+    <li><strong>Mobilité :</strong> jQuery Mobile, Phonegap, Android</li>
+  </ul>
+</section>
+
+<section>
+  <section>
+    <h2>Objectifs</h2>
+    <img src="img/objectif.jpg"/>
+  </section>
+
+  <section>
+    <h2>Evolution du Web</h2>
+    <img src="img/site.png" width="400"/>
+    <br>
+    <img src="img/arrow-down.jpg" height="100" style="margin: 0;"/>
+    <br>
+    <img src="img/app.png" width="400"/>
+  </section>
+
+  <section>
+    <h2>Evolution des navigateurs</h2>
+    <img src="img/ie-old.png" height="150"/>
+    <img src="img/netscape.png" height="150"/>
+    <br>
+    <img src="img/arrow-down.jpg" height="100" style="margin: 0;"/>
+    <br>
+    <img src="img/chrome-logo.png" height="150"/>
+    <img src="img/firefox-logo-huge.jpg" height="150"/>
+    <img src="img/Internet_Explorer_10_logo.svg.png" height="150"/>
+  </section>
+
+  <section>
+    <h2>Implications</h2>
+    <ul>
+      <li>Logique de développement d'applications lourdes
+        <ul>
+          <li>Intelligence côté client</li>
+          <li>Réactivité</li>
+          <li>Animations</li>
+        </ul>
+      </li>
+      <li class="no-bullet">&nbsp;</li>
+      <li>Modifications de l'architecture
+        <ul>
+          <li>Travailler avec les navigateurs</li>
+          <li>Développer en JavaScript</li>
+          <li>Utiliser des frameworks adpatés</li>
+          <li>Industrialiser les développements</li>
+        </ul>
+      </li>
+    </ul>
+  </section>
+</section>
+
+<section>
+  <h2>Programme</h2>
+  <ul>
+    <li>Écosystème
+      <ul>
+        <li>Le langage JavaScript, les frameworks</li>
+        <li>Les outils : build, qualité, tests</li>
+      </ul>
+    </li>
+    <li class="no-bullet">&nbsp;</li>
+    <li>AngularJS
+      <ul>
+        <li>Le projet, les orientations</li>
+        <li>Les fonctionnalités</li>
+        <li>Les tests</li>
+      </ul>
+    </li>
+  </ul>
+</section>
+
+
+<section>
+  <h2>Écosystème JavaScript et ses outils</h2>
+  <img src="img/yo.jpg">
+</section>
+
+<section>
+  <section>
+    <h2>JavaScript<br>le langage</h2>
+    <img src="img/JavaScript-logo.png" height="400">
+  </section>
+  <section>
+    <h2>Historique 1/2</h2>
+    <ul>
+      <li>Créé par Brendan Eich en 1995 pour Netscape</li>
+      <li>Netscape soumet le JavaScript à ECMA en 1996</li>
+      <li>ECMAScript 1 paraît en 1997</li>
+      <li>ECMAScript 3 paraît en 1999
+        <ul>
+          <li>Première version largement supportée</li>
+          <li>Implémenté par JavaScript, JScript et ActionScript</li>
+        </ul>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h2>Historique 2/2</h2>
+    <ul>
+      <li>ECMAScript 5 paraît en 2009
+        <ul>
+          <li>Supporté par tous les navigateurs récents</li>
+          <li>Fusion implicite de JavaScript et ECMAScript</li>
+        </ul>
+      </li>
+      <li>
+        ECMAScript 6 : projet Harmony
+        <ul>
+          <li>Evolution majeure</li>
+          <li>Très prometteur et très attendu</li>
+          <li>Promesse d'implémentation rapide</li>
+        </ul>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h2>Stack Web</h2>
+    <h4>Le JavaScript est un langage normal mais qui évolue dans le navigateur</h4>
+    <img src="img/perf-stack.png" height="400"/>
+  </section>
+  <section>
+    <h2>Quelques notions</h2>
+    <ul>
+      <li>Langage de script : interprété et non compilé</li>
+      <li>Syntaxe hérité du C et du Java</li>
+      <li>Non typé :</li>
+      <pre><code class="javascript">var a = 1; a += 'foo'; a += 2; //--> a = '1foo2'</code></pre>
+      <li>Prototypé :</li>
+      <pre><code class="javascript">var a = new String('foo'); b = new String('bar');
+a.up = function() {
+  return this.toString().toUpperCase()
+};
+a.up(); //--> FOO
+b.up(); //--> Undefined
+String.prototype.up = a.up;
+b.up(); //--> BAR</code></pre>
+      <li>Closure :</li>
+      <pre><code class="javascript">var a = 1, b = function() { a++ };
+b();
+a; //--> 2</code></pre>
+    </ul>
+  </section>
+</section>
+
+<section>
+  <section>
+    <h2>Les langages qui compilent en JavaScript</h2>
+    <img src="img/logo-coffee.png" class="white" style="padding: 20px;" height="100">
+    <img src="img/typescript-logo.png" height="140"/>
+    <img src="img/dart-logo.png" class="white" style="padding: 20px;" height="100"/>
+  </section>
+
+  <section>
+    <img src="img/logo-coffee.png" width="600" class="white" style="padding: 20px;"/>
+    <ul>
+      <li>Propose une syntaxe inspirée du Ruby
+        <ul>
+          <li>Utilise l'indentation pour les blocs</li>
+          <li>Allège le code en parenthèses et accolades</li>
+        </ul>
+      </li>
+      <table class="two-columns">
+        <tr>
+          <td><pre><code class="coffeescript">add = (arg1, arg2) ->
+  arg1 + arg2</code></pre>
+          </td>
+          <td><pre><code class="javascript">var add = function(arg1, arg2) {
+  return arg1 + arg2;
+};</code></pre>
+          </td>
+        </tr>
+      </table>
+      <li>Reste très proche du JavaScript
+        <ul>
+          <li>Le code JavaScript généré est très lisible</li>
+          <li>A tendance à produire du code plus fiable</li>
+        </ul>
+      </li>
+      <table class="two-columns">
+        <tr>
+          <td>
+            <pre><code class="coffeescript">zip = getPerson()?.address?.zipcode</code></pre>
+          </td>
+          <td><pre><code class="javascript">zip = typeof getPerson === "function" ?
+  (_ref = getPerson().address) != null ?
+  _ref.zipcode : void 0 : void 0;</code></pre>
+          </td>
+        </tr>
+      </table>
+    </ul>
+  </section>
+  <section>
+    <img src="img/typescript-logo.png"/>
+    <ul>
+      <li>Proposé par Microsoft en 2012</li>
+      <li>Génère un code JavaScript très propre</li>
+      <li>Ajoute principalement du typage et des classes</li>
+    </ul>
+    <img src="img/dart-logo.png" class="white" style="padding: 20px;"/>
+    <ul>
+      <li>Proposé par Google en 2011</li>
+      <li>Beaucoup plus ambitieux</li>
+      <li>Contient ses propres outils pour faire du Web</li>
+    </ul>
+  </section>
+</section>
+
+<section>
+  <section>
+    <h2>Écosystème des frameworks Web</h2>
+    <img src="img/jquery-logo-carre.jpg" height="200"/>
+    <img src="img/AngularJS-Shield-large.png" height="200"/>
+    <img src="img/bootstrap%20logo.png" height="200"/>
+  </section>
+  <section>
+    <h2>Les grandes familles</h2>
+    <table class="two-columns">
+      <tr class="two-lines">
+        <td>
+          Les librairies "Ajax"
+          <br/>
+          <img src="img/jquery-logo-carre.jpg" class="logo"/>
+          <img src="img/prototype-js-framework.png" class="logo"/>
+          <!--<img src="img/mootools.gif" class="logo" />-->
+          <img src="img/dojotoolkit.png" class="logo"/>
+        </td>
+        <td>
+          Les frameworks front-ends
+          <br/>
+          <img src="img/bootstrap%20logo.png" class="logo"/>
+          <img src="img/foudation.png" class="logo"/>
+          <img src="img/flat%20ui%20logo.jpg" class="logo"/>
+        </td>
+      </tr>
+      <tr class="two-lines">
+        <td>
+          Les frameworks MVC
+          <br/>
+          <img src="img/AngularJS-Shield-large.png" class="logo"/>
+          <img src="img/emberjs-logo.png" class="logo"/>
+          <img src="img/backbone.png" class="logo"/>
+        </td>
+        <td>
+          Les librairies spécialisées
+          <br/>
+          <img src="img/require.jpeg" class="logo"/>
+          <img src="img/raphael.gif" class="logo"/>
+          <img src="img/highcharts-javascript.jpg" class="logo"/>
+        </td>
+      </tr>
+    </table>
+  </section>
+  <section>
+    <h2>Les librairies Ajax 1/2</h2>
+    <ul>
+      <li>Fonctionnalités :</li>
+      <ul>
+        <li>Sélection dans le DOM</li>
+        <li>Modification du DOM</li>
+        <li>Ecoute d'évènements</li>
+        <li>Requêtes Ajax</li>
+      </ul>
+      <li class="center no-bullet">
+        <img src="img/prototype-js-framework.png" height="80"/>
+        <img src="img/dojotoolkit.png" height="80"/>
+        <img src="img/mootools.gif" height="80"/>
+      </li>
+      <li>
+        Marché très disputé dans les années 2005 - 2007
+        <ul>
+          <li>PrototypeJS</li>
+          <li>Dojo Toolkit</li>
+          <li>Mootools</li>
+          <li>Yahoo UI</li>
+        </ul>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h2>Les librairies Ajax 2/2</h2>
+    <ul>
+      <li>Marché écrasé par jQuery
+        <ul>
+          <li>Pratiquement considéré comme un standard</li>
+          <li>Prérequis à de nombreuses librairies</li>
+        </ul>
+      </li>
+      <li class="center no-bullet"><img src="img/jquery.png"/></li>
+      <li>
+        Seule faille à jQuery est son poids
+        <ul>
+          <li>Un peu lourd pour du mobile</li>
+          <li>Une alternative très populaire : Zepto</li>
+        </ul>
+      </li>
+    </ul>
+    <img src="img/zeptojs.jpg" height="80" style="padding: 5px;" class="white"/>
+  </section>
+
+  <section>
+    <h2>Les frameworks<br/>Front-Ends</h2>
+
+    <img src="img/bootstrap%20logo.png" class="left" height="200" style="margin-top: 255px;"/>
+    <ul>
+      <li>Fonctionnalités :
+        <ul>
+          <li>Base CSS moderne</li>
+          <li>Grille de positionnement</li>
+          <li>Design des composants HTML de base</li>
+          <li>Widgets courants : onglets, popup...</li>
+        </ul>
+      </li>
+      <li class="no-bullet">&nbsp;</li>
+      <li>Bootstrap est la référence
+        <ul>
+          <li>Premier projet sur GitHub</li>
+          <li>Simple d'utilisation</li>
+          <li>Design propre et sobre</li>
+          <li>De nombreux widgets</li>
+        </ul>
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Les frameworks MVC</h2>
+    <ul>
+      <li>Fonctionnalités :
+        <ul>
+          <li>Réalisation d'interface en JS</li>
+          <li>Structure MVC</li>
+          <li>Templating</li>
+        </ul>
+      </li>
+      <li class="no-bullet">&nbsp;</li>
+      <li>Trois acteurs majeurs actuellement
+        <ul>
+          <li>BackboneJS : Plus connu mais un peu <i>trop</i> simple</li>
+          <li>EmberJS : Très riche mais complexe</li>
+          <li>AngularJS : En pleine explosion, simple & puissant !</li>
+        </ul>
+      </li>
+      <li class="center no-bullet">
+        <img src="img/AngularJS-Shield-large.png" class="logo"/>
+        <img src="img/emberjs-logo.png" class="logo"/>
+        <img src="img/backbone.png" class="logo"/>
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Les librairies spécialisées</h2>
+    <ul>
+      <li>A sélectionner en fonction des besoins
+        <ul>
+          <li>Graphique</li>
+          <li>Cartographie</li>
+          <li>Dessin</li>
+          <li>3D</li>
+          <li>Son</li>
+        </ul>
+      </li>
+      <li class="center no-bullet">
+        <img src="img/require.jpeg" class="logo"/>
+        <img src="img/raphael.gif" class="logo"/>
+        <img src="img/highcharts-javascript.jpg" class="logo"/>
+      </li>
+    </ul>
+  </section>
+</section>
+
+<section>
+  <section>
+    <h2>Node.js</h2>
+    <img src="img/nodejs-1024x768.png" height="500"/>
+  </section>
+  <section>
+    <h2>Définition</h2>
+
+    <h3>Node.js est une <strong>plateforme</strong>, pas un framework ni un serveur Web.</h3>
+    <img src="img/v8logo.png" height="200" class="left">
+    <ul>
+      <li>Node.js permet d'executer du JS</li>
+      <li>Basé sur l'interpreteur JS V8</li>
+      <li>Apporte une API système codé en C</li>
+      <li>Entièrement basé sur des I/O asynchrones</li>
+
+      <li class="no-bullet">&nbsp;</li>
+      <li>Atouts :
+        <ul>
+          <li>Optimisations de V8</li>
+          <li>Portable</li>
+          <li>Léger</li>
+          <li>Profite de l'asynchronisme du JS</li>
+        </ul>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h2>NPM</h2>
+
+    <h3>Node Packet Manager</h3>
+    <img src="img/npm.png"/>
+    <ul>
+      <li>Système de package intégré à Node.js</li>
+      <li>Téléchargement automatique des dépendances</li>
+      <li>Gestion des dépendances transitives avec isolation</li>
+    </ul>
+  </section>
+  <section>
+    <h2>Cas d'utilisation<br>Développements</h2>
+    <ul>
+      <li>Un script Node.js permet facilement de :
+        <ul>
+          <li>Copier, compresser des fichiers</li>
+          <li>Compiler du CoffeeScript ou du less</li>
+          <li>"Minifier" du JavaScript</li>
+          <li>Lancer des tests JavaScript</li>
+          <li>Surveiller des modifications sur un répertoire</li>
+          <li>Lancer un serveur HTTP de développement</li>
+        </ul>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h2>Cas d'utilisation<br>Serveur Web</h2>
+    <ul>
+      <li>Les I/O asynchrones lui permettent :
+        <ul>
+          <li>Pouvoir gérer beaucoup de requêtes simultanées</li>
+          <li>Être très réactif pour des opérations simples</li>
+          <li>Peu adapté pour des traitements lourds</li>
+        </ul>
+      </li>
+      <li class="no-bullet">&nbsp;</li>
+      <li>Node.js n'est pas un serveur Web</li>
+      <li>De très bons frameworks existent :
+        <ul>
+          <li>Express.js</li>
+          <li>Socket.IO</li>
+          <li>Mongoose</li>
+        </ul>
+      </li>
+    </ul>
+  </section>
+</section>
+
+<section>
+  <section>
+    <h2>Outils du<br>JavaScript et du Web</h2>
+     <img src="img/compass-css-framework.jpg" height="150">
+     <img src="img/jshint-blue.png" height="150">
+     <img src="img/jasmine-logo.png" height="150">
+  </section>
+  <section>
+    <h2>Meta langages</h2>
+
+    <ul>
+      <li>
+        Langages de programmation
+        <ul>
+          <li>CoffeeScript</li>
+          <li>TypeScript</li>
+        </ul>
+      </li>
+      <li class="no-bullet">
+        <img src="img/coffee.jpg" height="100">
+        <img src="img/typescript-logo.png" height="100">
+      </li>
+      <li>
+        CSS
+        <ul>
+          <li>Less</li>
+          <li>Compass</li>
+        </ul>
+      </li>
+      <li class="no-bullet">
+        <img src="img/less.png" height="100">
+        <img src="img/compass-css-framework.jpg" height="100">
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h2>Optimisation</h2>
+    <ul>
+      <li>
+        Parser / Minifier / Compressor / Beautifier
+        <ul>
+          <li>UglifyJS</li>
+          <li>JSMin</li>
+          <li>YUICompressor</li>
+          <li>Google Closure Compiler</li>
+        </ul>
+      </li>
+      <li class="no-bullet">&nbsp;</li>
+      <li> Concaténation
+        <ul>
+          <li>Script</li>
+        </ul>
+      </li>
+      <li class="no-bullet">&nbsp;</li>
+      <li> Documentation
+        <ul>
+          <li>JSDoc</li>
+        </ul>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h2>Développement</h2>
+    <ul>
+      <li>
+        Vérification de qualité
+        <ul>
+          <li>JSHint</li>
+          <li>JSLint</li>
+        </ul>
+      </li>
+      <li class="no-bullet">
+        <img src="img/jshint-blue.png" height="100">
+        <img src="img/Jslint.gif" height="100">
+      </li>
+      <li>
+        Tests
+        <ul>
+          <li>Jasmine</li>
+          <li>Mocha</li>
+          <li>Qunit</li>
+          <li>Karma</li>
+        </ul>
+      </li>
+      <li class="no-bullet">
+        <img src="img/jasmine-logo.png" height="100">
+        <img src="img/mocha-logo.png" height="100">
+        <img src="img/qunit.png" height="100">
+      </li>
+    </ul>
+  </section>
+</section>
+
+<section>
+  <section>
+    <h2>Gestion des dépendances</h2>
+    <img src="img/bower-logo.png"/>
+  </section>
+  <section>
+    <h2>Bower</h2>
+    <ul>
+      <li>
+        Projet
+        <ul>
+          <li>A été démarré chez Twitter</li>
+          <li>Registre ouvert & public</li>
+          <li>S'installe avec Node Package Manager</li>
+          <li>Récupère les packages via Git</li>
+        </ul>
+      </li>
+      <li class="no-bullet">&nbsp;</li>
+      <li>Principe
+        <ul>
+          <li>Manifest : bower.json (anciennement component.json)</li>
+          <li>Se base sur un registry</li>
+          <li>Utilise le versionning des tags Git</li>
+          <li>Fonctionne le plus souvent avec GitHub</li>
+          <li><a href="http://sindresorhus.com/bower-components/">http://sindresorhus.com/bower-components/</a></li>
+        </ul>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h2>Fonctionnalités</h2>
+    <ul>
+      <li>
+        search
+        <ul>
+          <li>Rechercher une librairie dans le registre</li>
+        </ul>
+      </li>
+      <li>
+        install
+        <ul>
+          <li>Installer une librairie</li>
+        </ul>
+      </li>
+      <li>
+        list
+        <ul>
+          <li>Afficher l'arbre de dépendances du projet</li>
+        </ul>
+      </li>
+      <li>
+        update
+        <ul>
+          <li>Mettre à jour une librairie</li>
+        </ul>
+      </li>
+    </ul>
+  </section>
+</section>
+
+<section>
+  <section>
+    <h2>Build</h2>
+    <img src="img/grunt-logo.png"/>
+  </section>
+  <section>
+    <h2>Grunt</h2>
+    <ul>
+      <li>Projet
+        <ul>
+          <li>Outils de build du web et du JavaScript</li>
+          <li>Automatisation</li>
+        </ul>
+      </li>
+      <li class="no-bullet">&nbsp;</li>
+      <li>Principe
+        <ul>
+          <li>Packaging</li>
+          <li>Harmonisation</li>
+          <li>Tests</li>
+          <li>Qualité</li>
+        </ul>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h2>Modularité</h2>
+    <ul>
+      <li>NPM
+        <ul>
+          <li>Nombreux plugins Grunt</li>
+          <li>Bridge pour tous les outils du JavaScript</li>
+        </ul>
+      </li>
+      <li class="no-bullet">&nbsp;</li>
+      <li>API simple
+        <ul>
+          <li>Customisation de tâches</li>
+          <li>Enregistrement de nouvelles tâches</li>
+        </ul>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h2>Cas d’utilisation<br>Développement</h2>
+    <ul>
+      <li>watch
+        <ul>
+          <li>Observe les modifications sur les sources</li>
+          <li>Lance des tâches en fonction des modifications</li>
+        </ul>
+      </li>
+      <li>less
+        <ul>
+          <li>"Compile" le Less</li>
+        </ul>
+      </li>
+      <li>coffee
+        <ul>
+          <li>"Compile" le CoffeeScript</li>
+        </ul>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h2>Cas d’utilisation<br>Tests</h2>
+    <ul>
+      <li>jasmine
+        <ul>
+          <li>Lance des tests Jasmine</li>
+        </ul>
+      </li>
+      <li>mocha
+        <ul>
+          <li>Lance des tests Mocha</li>
+        </ul>
+      </li>
+      <li>casper
+        <ul>
+          <li>Lance des script casper dans PhantomJS</li>
+        </ul>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h2>Cas d’utilisation<br>Packaging</h2>
+    <ul>
+      <li>cdnify
+        <ul>
+          <li>Modifie les imports du index.html pour utiliser des CDN</li>
+        </ul>
+      </li>
+      <li>concat
+        <ul>
+          <li>Concatène des fichiers JS ou CSS</li>
+        </ul>
+      </li>
+      <li>uglify
+        <ul>
+          <li>Parse, compresse et optimise les fichiers JavaScript</li>
+        </ul>
+      </li>
+    </ul>
+  </section>
+</section>
+
+<section>
+  <section>
+    <h2>Yeoman</h2>
+    <img src="img/yeoman-logo.png">
+  </section>
+  <section>
+    <h2>Projet</h2>
+    <ul>
+      <li>
+        Équipe
+        <ul>
+          <li>Paul Irish</li>
+          <li>Addy Osmani</li>
+          <li>Sindre Sorhus</li>
+          <li>Mickael Daniel</li>
+          <li>Eric Bidelman</li>
+        </ul>
+      </li>
+      <li class="no-bullet">&nbsp;</li>
+      <li>
+        Trois outils
+        <ul>
+          <li>Yo</li>
+          <li>Bower</li>
+          <li>Grunt</li>
+        </ul>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h2>Yo</h2>
+    <img src="img/yo.png">
+    <br>
+    <ul>
+      <li>Initiateur de projet</li>
+      <li>De nombreux générateurs</li>
+      <li>Dont AngularJS</li>
+    </ul>
+  </section>
+  <section>
+    <h2>Gruntfile</h2>
+    <ul>
+      <li>
+        Configuration par défaut très complète
+        <ul>
+          <li>server</li>
+          <li>build</li>
+          <li>test</li>
+        </ul>
+      </li>
+    </ul>
+    <pre><code class="javascript">grunt.registerTask('server', [
+  'clean:server', 'coffee:dist', 'compass:server',
+  'livereload-start', 'connect:livereload', 'open', 'watch' ]);
+
+grunt.registerTask('test', [
+  'clean:server', 'coffee', 'compass', 'connect:test', 'karma' ]);
+
+grunt.registerTask('build', [
+  'clean:dist', 'jshint', 'test', 'coffee', 'compass:dist',
+  'useminPrepare', 'imagemin', 'cssmin', 'htmlmin', 'concat',
+  'copy', 'cdnify', 'ngmin', 'uglify', 'rev', 'usemin' ]);</code></pre>
+  </section>
+</section>
+
+<section>
+  <section>
+    <h2>Développement</h2>
+    <img src="img/slide8.jpg">
+  </section>
+  <section>
+    <h2>IDE</h2>
+    <ul>
+      <li>IntelliJ / WebStorm</li>
+      <li>Eclipse</li>
+      <li>Sublime Text 2</li>
+    </ul>
+    <br/>
+    <img src="img/IntelliJIDEA-logo.png" style="height: 200px"/>
+    <img src="img/eclipse-logo.png" style="height: 200px"/>
+    <img src="img/sublime_text-logo.png" style="height: 200px"/>
+  </section>
+  <section>
+    <h2>Chrome Dev Tools</h2>
+    <ul>
+      <li>Ou Firefox Dev Tools</li>
+      <li>Opera Dragon Fly</li>
+      <li>Microsoft Visual Web Developper</li>
+    </ul>
+    <br/>
+    <img src="img/chrome-logo.png" style="height: 200px"/>
+    <img src="img/firefox-logo.png" style="height: 200px"/>
+    <img src="img/opera-logo.png" style="height: 200px"/>
+    <img src="img/visual-studio-logo.png" style="height: 200px"/>
+  </section>
+  <section>
+    <h2>Chrome Dev Tools</h2>
+    <ul>
+      <li>Inspecteur de la page</li>
+      <li>Console !</li>
+      <li>Debugger complet</li>
+      <li>Analyseur réseau</li>
+      <li>Profiler</li>
+      <li>Emulateur mobile</li>
+      <li>Batarang</li>
+    </ul>
+  </section>
+</section>
+
+<section>
+  <section>
+    <h2>Architecture serveur pour une application JavaScript</h2>
+    <img src="img/archi.jpg" height="400"/>
+  </section>
+  <section>
+    <h2>Faire une application en JavaScript</h2>
+    <ul>
+      <li>Fichiers statiques : HTML / JavaScript / CSS</li>
+      <li>Réaliser le rendu des templates en JavaScript</li>
+      <li>Single Page Webapp</li>
+      <li>Echanges en JSON avec le serveur</li>
+    </ul>
+    <img src="img/archi.png">
+  </section>
+  <section>
+    <h2>Architectures Serveur</h2>
+    <img src="img/archis.png">
+  </section>
+</section>
+
+<section>
+  <h2>AngularJS</h2>
+  <img src="img/AngularJS-huge.png">
+</section>
+
+<section>
+  <h2>"GitHub" Trends</h2>
+  <img src="img/oimg.png">
+</section>
+
+<section>
+  <section>
+    <h2>Le Projet</h2>
+    <img src="img/angularjs-old-logo.png">
+  </section>
+  <section>
+    <h2>Genèse</h2>
+    <ul>
+      <li>Créé en 2009</li>
+      <li>Miško Hevery et Adam Abrons</li>
+    </ul>
+    <br>
+    <img src="img/hevery.jpg" height="200">
+    <img src="img/abrons.jpeg" height="200">
+    <ul>
+      <li>Visualisation de données JSON</li>
+      <li>Hors du contexte de Google</li>
+      <li>Démarrage discret</li>
+    </ul>
+  </section>
+  <section>
+    <h2>Google</h2>
+    <ul>
+      <li>Investissement massif de Google en 2011</li>
+      <li>Refonte du site, du logo</li>
+      <li>Constitution d'un équipe dédiée avec Miško Hevery
+        <ul>
+          <li>Brad Green, Igor Minar, Vojta Jina, Brian Ford</li>
+        </ul>
+      </li>
+      <li>Communication importante dans les conférences</li>
+    </ul>
+    <img src="img/bradgreen.jpeg" height="150">
+    <img src="img/hevery.jpg" height="150">
+    <br>
+    <img src="img/igor-minar.jpg" height="150">
+    <img src="img/vojta-jina.jpg" height="150">
+    <img src="img/brianford.jpeg" height="150">
+  </section>
+  <section>
+    <h2>Stratégie Google</h2>
+
+    <h3>N'engage que moi !</h3>
+    <ul>
+      <li>GWT sur le déclin</li>
+      <li>JavaScript en vogue</li>
+      <li>Opportunité en interne</li>
+      <li>(N'est plus) En conflit avec Dart : <a href="https://github.com/angular/angular.dart">https://github.com/angular/angular.dart</a></li>
+      <li>Convergence sur les WebComponents</li>
+    </ul>
+  </section>
+</section>
+
+<section>
+  <section>
+    <h2>Orientations</h2>
+    <img src="img/compass.jpg" height="500">
+  </section>
+  <section>
+    <h2>Déclaratif plutôt qu'impératif</h2>
+    <ul>
+      <li>L'impératif est très lourd pour les UIs</li>
+      <li>La lisibilité est bien meilleure en déclaratif</li>
+      <li>jQuery pousse à faire de l'impératif</li>
+    </ul>
+    <img src="img/impertaive-declarative.png" height="350">
+  </section>
+  <section>
+    <h2>Extension du Web</h2>
+
+    <h3>Conserve le paradigme du Web</h3>
+    <img src="img/html5_css_javascript.png">
+    <ul>
+      <li>Extension de l'HTML pour les besoins modernes</li>
+      <li>Utiliser l'HTML comme langage déclaratif</li>
+      <li>Limiter la quantité de code JavaScript</li>
+    </ul>
+  </section>
+  <!--<section>
+    <h2>Ecosystème JavaScript</h2>
+
+    <h3>AngularJS permet de faire des applications Web en JavaScript</h3>
+    <img src="img/JavaScript-logo.png" height="200">
+    <br>
+    <ul>
+      <li>C'est un framework en JavaScript</li>
+      <li>S'appuyant sur l'ecosystème</li>
+      <li>Le développement se fait en JavaScript</li>
+    </ul>
+  </section>-->
+  <section>
+    <h2>Propreté et puissance</h2>
+    <ul>
+      <li>Le code à produire
+        <ul>
+          <li>Rapide à produire</li>
+          <li>Lisibilité</li>
+          <li>Simplicité</li>
+          <li>Concision</li>
+        </ul>
+      </li>
+      <li>Structuration du code
+        <ul>
+          <li>Organisation des fichiers</li>
+          <li>MVC</li>
+          <li>Widgets</li>
+        </ul>
+      </li>
+      <li>Accès facilité à des fonctionnalités avancées
+        <ul>
+          <li>Navigation</li>
+          <li>Dialogue REST</li>
+          <li>Animations</li>
+        </ul>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h2>"Toutes" les applications</h2>
+    <ul>
+      <li>Peut s'adapter à toutes les utilisations
+        <ul>
+          <li>Une zone réduite de la page</li>
+          <li>Petite application Web</li>
+          <li>Application Web importante</li>
+        </ul>
+      </li>
+      <li class="no-bullet">&nbsp;</li>
+      <li>Peu logique pour une zone localisée, préférer jQuery</li>
+      <li>Idéal pour une application moyenne</li>
+      <li>Pour une application très complète
+        <ul>
+          <li>Si possible, la diviser</li>
+          <li>Sinon, utiliser quelques bons modules</li>
+        </ul>
+      </li>
+    </ul>
+  </section>
+</section>
+
+<section>
+  <section>
+    <h2>Fonctionnalités</h2>
+    <img src="img/modules.jpg">
+  </section>
+  <section>
+    <h2>MVC</h2>
+
+    <h3>JSON / HTML / JS</h3>
+    <ul>
+      <li>Modèle : Données JSON standards : le scope</li>
+      <li>Vue : Document HTML étendu</li>
+      <li>Controleur : Fonction JavaScript</li>
+    </ul>
+    <img src="img/mvc.png" height="300">
+  </section>
+  <section>
+    <h2>Extension du HTML</h2>
+    <ul>
+      <li>Utilisation du HTML standard comme vue</li>
+      <li>Ajout de fonctionnalités
+        <ul>
+          <li>Via des nouvelles balises</li>
+          <li>Via des nouvelles propriétés</li>
+          <li>En commentaire ou avec des class (moins utilisé)</li>
+        </ul>
+      </li>
+
+      <pre><code class="html">&lt;ul>
+  &lt;li ng-repeat="contact in contacts" ng-click="click($index)">
+    {{contact.name}}
+  &lt;/li>
+&lt;/ul></code></pre>
+
+      <li>Permet de faire beaucoup de code déclaratif
+        <ul>
+          <li>Meilleure lisibilité</li>
+          <li>Concision du code</li>
+        </ul>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h2>Two Way Data Binding</h2>
+    <ul>
+      <li>Modèle vers la vue
+        <ul>
+          <li>Données du modèle sont liées à la vue</li>
+          <li>Modifications du modèle rafraichissent la vue</li>
+          <li>Exemple : arrivée asynchrone des données</li>
+        </ul>
+      </li>
+      <li class="no-bullet">&nbsp;</li>
+      <li>Vue vers le modèle
+        <ul>
+          <li>Les saisies de l'utilisateur sont liées au modèle</li>
+          <li>Modifications du modèle rafraichissent la vue</li>
+          <li>Exemple : saisie dans un formulaire</li>
+        </ul>
+      </li>
+      <li class="no-bullet">&nbsp;</li>
+    </ul>
+    <pre><code class="html">&lt;input type="text" ng-model="hello">
+&lt;p>{{hello}}&lt;/p></code></pre>
+  </section>
+  <section>
+    <h2>Directives & Filtres</h2>
+    <ul>
+      <li>Directives
+        <ul>
+          <li>Permet d'associer du comportement au DOM</li>
+          <li>Evite d'avoir à faire des sélections du DOM</li>
+          <li>API pour faire du plus simple au plus complexe</li>
+          <li>Template et controller pour faire des Widgets</li>
+        </ul>
+      </li>
+      <li>Filtres
+        <ul>
+          <li>Permet de transformer les données déclarativement</li>
+          <li>Plus propre et plus lisible</li>
+          <li>Fonctionne pour des listes ou des valeurs simples</li>
+        </ul>
+      </li>
+      <li class="no-bullet">&nbsp;</li>
+    </ul>
+    <pre><code class="html">&lt;input type="text" ng-model="search">
+&lt;datagrid>
+  &lt;line ng-repeat="contact in contacts | orderBy:'name' | filter:search">
+&lt;/datagrid></code></pre>
+  </section>
+  <section>
+    <h2>Injection de dépendances</h2>
+    <ul>
+      <li>Le code JavaScript est localisé dans des modules
+        <ul>
+          <li>Permet de la structure et de l'isolation</li>
+        </ul>
+      </li>
+      <li class="no-bullet">&nbsp;</li>
+      <li>Les modules sont composés d'éléments typés
+        <ul>
+          <li>Controleurs, services, directives...</li>
+        </ul>
+      </li>
+      <li class="no-bullet">&nbsp;</li>
+      <li>Gère les dépendances et l'ordre d'execution
+        <ul>
+          <li>Orchestre les executions des codes JavaScript</li>
+        </ul>
+      </li>
+    </ul>
+    <pre><code class="javascript">angular.module('myModule', ['myDependency'])
+
+  .factory('myService', function() { return myService })
+
+  .controller('myController', function($scope) { /* do stuff */ })
+
+  .directive('myDirective', function() { return { /* directive */ }});</code></pre>
+  </section>
+  <section>
+    <h2>Navigation</h2>
+    <ul>
+      <li>Le routeur d'AngularJS permet de gèrer des URLs
+        <ul>
+          <li>L'URL utilise un "#" qui évite le rechargement</li>
+          <li>Peut exploiter l'HTML5 pour le masquer</li>
+          <li>Gère des paramètres</li>
+          <li>Associe une vue et un controleur à chaque route</li>
+        </ul>
+      </li>
+    </ul>
+    <pre><code class="javascript">angular.module('phonecat', [])
+  .config(function($routeProvider) {
+    $routeProvider
+      .when('/phones', {
+        templateUrl: 'partials/phone-list.html',
+        controller: PhoneListCtrl
+      })
+      .when('/phones/:phoneId', {
+        templateUrl: 'partials/phone-detail.html',
+        controller: PhoneDetailCtrl
+      })
+      .otherwise({redirectTo: '/phones'});
+    });</code></pre>
+  </section>
+  <section>
+    <h2>Ressources REST</h2>
+    <ul>
+      <li>Module optionnel d'Angular
+        <ul>
+          <li>Configuré à partir de l'URL</li>
+          <li>Gère les méthodes : GET, PUT, POST, DELETE</li>
+          <li>Permet de positionner un paramètre dans l'URL</li>
+          <li>Peut renseigner l'URL avec un champ de l'objet</li>
+          <li>Fournit des objets enrichis : $save, $delete</li>
+        </ul>
+      </li>
+    </ul>
+    <pre><code class="javascript">var User = $resource('/user/:userId', { userId: '@id' });
+
+var user = User.get({ userId: 123 }, function() {
+  user.abc = true;
+  user.$save();
+});</code></pre>
+  </section>
+  <section>
+    <h2>Testabilité</h2>
+    <ul>
+      <li>Tests unitaires
+        <ul>
+          <li>L'injection de dépendances oriente facilite les tests</li>
+          <li>Permet de tester élément par élement</li>
+          <li>Permet de mocker les autres composants</li>
+          <li>Produit des tests vraiment unitaires</li>
+          <li>Jasmine & Angular-mock</li>
+        </ul>
+      </li>
+      <li>Tests end to end
+        <ul>
+          <li>Angular-scenario permet de tester des scenarios</li>
+          <li>Il est possible de simuler des actions utilisateurs</li>
+        </ul>
+      </li>
+      <li>Karma Test Runner
+        <ul>
+          <li>Karma permet d'automatiser l'execution des tests</li>
+          <li>Surveille les sources pour relancer les tests</li>
+        </ul>
+      </li>
+    </ul>
+  </section>
+</section>
+
+<section>
+  <section>
+    <h2>En pratique</h2>
+    <img src="img/pratique.png" height="300">
+  </section>
+  <section>
+    <h2>Debugging</h2>
+    <ul>
+      <li>Toutes les fonctions Angular sont nommées</li>
+      <li>Les exceptions sont plutôt explicites</li>
+      <li class="no-bullet">&nbsp;</li>
+      <li>Debugger JavaScript</li>
+      <li>Log console, avec affichage riche des données</li>
+      <li class="no-bullet">&nbsp;</li>
+      <li>Extension Chrome Batarang
+        <ul>
+          <li>Consultation des scopes</li>
+          <li>Performances</li>
+          <li>Dépendances</li>
+        </ul>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <img src="img/batarang-models.png">
+  </section>
+  <section>
+    <img src="img/batarang-perf.png">
+  </section>
+  <section>
+    <img src="img/batarang-console.png">
+  </section>
+  <section>
+    <h2>Performances</h2>
+    <h4>Les performances d'AngularJS ne sont pas dépendantes de la charge du serveur</h4>
+    <h4>Elles sont dépendantes de la machine et du navigateur du client</h4>
+    <ul>
+      <li>Le serveur est moins sollicité (pas de rendu à faire)</li>
+      <li>Poids : raisonnable, attention à l'accumulation de plugins</li>
+      <li>Peut ralentir s'il y a trop de données affichées à l'écran</li>
+      <li>Si possible, alléger la page</li>
+      <li>Sinon, optimiser les binding pour réduire les rafraichissements</li>
+    </ul>
+  </section>
+  <section>
+    <h2>Compatibilités</h2>
+    <ul>
+      <li>Ok :
+        <ul>
+          <li>
+            IE8+, Chrome, Firefox, Opera, Safari...
+          </li>
+        </ul>
+      </li>
+      <li class="no-bullet">&nbsp;</li>
+      <li>Attention : <a href="http://docs.angularjs.org/guide/ie">http://docs.angularjs.org/guide/ie</a>
+        <ul>
+          <li>IE 6 et 7</li>
+          <li>Limitations du au code HTML non standard</li>
+          <li>Ajouter : <strong>xmlns:ng="http://angularjs.org"</strong></li>
+          <li>Utiliser uniquement des attributs, pas de balise</li>
+        </ul>
+      </li>
+      <li class="no-bullet">&nbsp;</li>
+      <li>Validation W3C :
+        <ul>
+          <li>AngularJS peut utiliser le prefix "data-"</li>
+          <li>Exemple : <strong>&lt;div data-ng-view></strong></li>
+          <li>Permet d'avoir un code totalement valide</li>
+        </ul>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h2>SEO</h2>
+    <h3>Search Engine Optimization</h3>
+    <ul>
+      <li>Promesses de Google d'interpréter le JavaScript</li>
+      <li class="no-bullet">&nbsp;</li>
+      <li>Consiste à faire s'executer AngularJS côté serveur</li>
+      <li>Fonctionne avec un routage serveur et PhantomJS</li>
+      <li>Nécessite une bonne gestion des URLs</li>
+      <li>Répond à des problèmes d'accessibilités</li>
+      <li class="no-bullet">&nbsp;</li>
+      <li><a href="http://www.yearofmoo.com/2012/11/angularjs-and-seo.html">http://www.yearofmoo.com/2012/11/angularjs-and-seo.html</a></li>
+    </ul>
+  </section>
+  <section>
+    <h2>Arborescence d'un projet</h2>
+    <h4>Exemple d'arorescence</h4>
+  </section>
+  <section>
+    <ul style="margin-top: -40px;">
+      <li>app
+        <ul>
+          <li>components</li>
+          <li>img</li>
+          <li>styles</li>
+          <li>scripts
+            <ul>
+              <li>controllers
+                <ul>
+                  <li>admin.js</li>
+                  <li>home.js</li>
+                </ul>
+              </li>
+              <li>directives</li>
+              <li>filters</li>
+              <li>app.js</li>
+            </ul>
+          </li>
+          <li>views
+            <ul>
+              <li>admin.html</li>
+              <li>home.html</li>
+            </ul>
+          </li>
+          <li>index.html</li>
+        </ul>
+      </li>
+      <li>test</li>
+      <li>Gruntfile.js</li>
+    </ul>
+  </section>
+</section>
+
+<section>
+  <h2>Faiblesses</h2>
+  <ul>
+    <li>Routeur
+      <ul>
+        <li>Ne gère qu'une vue</li>
+        <li>Ne gère pas d'imbrications</li>
+        <li>Pallier par le projet Angular UI Router (très jeune)</li>
+      </ul>
+    </li>
+    <li>API des directives
+      <ul>
+        <li>API assez complexe à appréhender</li>
+        <li>Beaucoup d'astuces à connaître</li>
+        <li>Doit converger vers les Web Components</li>
+      </ul>
+    </li>
+    <li>Resources
+      <ul>
+        <li>Nécessite un service REST "standard"</li>
+        <li>Difficile à étendre</li>
+        <li>$http ou Restangular</li>
+      </ul>
+    </li>
+  </ul>
+</section>
+
+<section>
+  <section>
+    <h2>Extensions</h2>
+    <a href="http://ngmodules.org/">http://ngmodules.org/</a>
+    <br>
+    <img src="img/ngmodules.png">
+  </section>
+  <section>
+    <h2>Composants</h2>
+    <ul>
+      <li>Bootstrap
+        <ul>
+          <li>AngularStrap : intégration propre</li>
+          <li>UI Boostrap : réimplémentation sans jQuery</li>
+        </ul>
+      </li>
+      <li class="no-bullet">&nbsp;</li>
+      <li>ngGrid</li>
+      <li>Infinite Scroll</li>
+      <li>Typehead</li>
+      <li>Drag and Drop</li>
+    </ul>
+  </section>
+  <section>
+    <h2>Services</h2>
+    <ul>
+      <li>UI Router : très prometteur !</li>
+      <li>Restangular</li>
+      <li>ng-translate</li>
+      <li>ngUpload</li>
+      <li>http-auth-interceptor</li>
+    </ul>
+  </section>
+</section>
+
+<section>
+  <section>
+    <h2>Tests</h2>
+    <img src="img/tester-cest-douter-compiler-cest-livrer.jpg" height="500">
+  </section>
+  <section>
+    <h2>Tests unitaires</h2>
+    <ul>
+      <li>Propose Jasmine par défaut</li>
+      <li>Fonctionne avec n'importe quel framework</li>
+      <li>L'injection de dépendance joue au maximum</li>
+      <li>Angular Mock apporte tout ce qu'il faut pour compléter
+        <ul>
+          <li>Accès à l'injection de dépendance</li>
+          <li>Possibilté de remplacer des dépendances</li>
+          <li>Mock de requêtes HTTP</li>
+        </ul>
+      </li>
+    </ul>
+    <pre><code class="javascript">beforeEach(inject(function ($httpBackend) {
+  $httpBackend
+    .expectGET('/count')
+    .respond([1, 2, 3]);
+}));</code></pre>
+  </section>
+  <section>
+    <h2>End 2 End<br>Angular Scenario</h2>
+    <ul>
+      <li>Angular propose une fonctionnalité unique</li>
+      <li>Fonctionne dans tous les navigateurs</li>
+      <li>Permet de simuler un scénario dans un navigateur</li>
+      <li>Propose une API de controle de l'objet "browser"</li>
+      <li>Propose une API pour tester l'état de la page</li>
+    </ul>
+    <pre><code class="javascript">describe('myApp', function () {
+  it('should redirect index.html to index.html#/hello', function () {
+    browser().navigateTo('../../app/index.html');
+    expect(browser().location().url()).toBe('/hello');
+  });
+});</code></pre>
+  </section>
+
+  <section>
+    <h2>Karma</h2>
+    <h3>JavaScript Test Runner</h3>
+    <ul>
+      <li>N'est pas une solution de test</li>
+      <li>Il s'agit de "l'executeur"</li>
+      <li>Peut fonctionner en dehors d'AngularJS</li>
+      <li>Sera intégré à WebStorm 7 / IntelliJ 13</li>
+      <li class="no-bullet">&nbsp;</li>
+      <li>Lance les tests dans un ou plusieurs navigateurs</li>
+      <li>Peut surveiller les sources pour relancer les tests</li>
+      <li>Fonctionne avec Angular Scenario</li>
+    </ul>
+  </section>
+
+</section>
+
+<section>
+  <h2>Le Futur</h2>
+  <ul>
+    <li>AngularJS 1.2 (actuellement branche 1.1.x)
+      <ul>
+        <li>Animations</li>
+        <li>Promesses</li>
+        <li>Directives en commentaire HTML</li>
+      </ul>
+    </li>
+    <li class="no-bullet">&nbsp;</li>
+    <li>AnuglarJS 2.0 (?)
+      <ul>
+        <li>Web Components</li>
+        <li>Polymer JS</li>
+      </ul>
+    </li>
+  </ul>
+  <img src="img/polymer.png">
+</section>
+
+<section>
+  <h1>Merci</h1>
+  <br><br><br><br><br>
+
+  <h3>Matthieu Lux <a href="https://twitter.com/swiip">@Swiip</a></h3>
+  <h3>Zenika <a href="https://twitter.com/zenikait">@ZenikaIT</a></h3>
+  <h3>Zenika Lyon <a href="https://twitter.com/zenikalyon">@ZenikaLyon</a></h3>
+</section>
+
+</div>
+
+<aside class="logo">
+  <img src="img/zenika-logo-small.png"/>
+</aside>
+
+</div>
+
+<script src="lib/js/head.min.js"></script>
+<script src="js/reveal.min.js"></script>
+<script src="http://code.jquery.com/jquery-2.0.2.min.js"></script>
+
+<script>
+
+  // Full list of configuration options available here:
+  // https://github.com/hakimel/reveal.js#configuration
+  Reveal.initialize({
+    controls: true,
+    progress: true,
+    history: true,
+    center: false,
+
+    theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+    transition: Reveal.getQueryHash().transition || 'linear', // default/cube/page/concave/zoom/linear/fade/none
+
+    // Optional libraries used to extend on reveal.js
+    dependencies: [
+      { src: 'lib/js/classList.js', condition: function () {
+        return !document.body.classList;
+      } },
+      { src: 'plugin/markdown/marked.js', condition: function () {
+        return !!document.querySelector('[data-markdown]');
+      } },
+      { src: 'plugin/markdown/markdown.js', condition: function () {
+        return !!document.querySelector('[data-markdown]');
+      } },
+      { src: 'plugin/highlight/highlight.js', async: true, callback: function () {
+        hljs.initHighlightingOnLoad();
+      } },
+      { src: 'plugin/zoom-js/zoom.js', async: true, condition: function () {
+        return !!document.body.classList;
+      } },
+      { src: 'plugin/notes/notes.js', async: true, condition: function () {
+        return !!document.body.classList;
+      } }
+      // { src: 'plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; } }
+      // { src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+    ]
+  });
+
+  //Footer logo
+  //$('.reveal section').append('<footer><img class="footer" src="img/zenika-logo-small.png"/></footer>')
+
+</script>
+
+</body>
+</html>
