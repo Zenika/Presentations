@@ -1,0 +1,11 @@
+{
+  "name": "formation-zenika",
+  "version": "0.0.0",
+  "author": "Zenika",
+  "dependencies": {
+    "grunt": "~0.4.4",
+    "grunt-contrib-connect": "~0.7.1",
+    "grunt-contrib-watch": "~0.6.0"
+  },
+  "devDependencies": {}
+}
