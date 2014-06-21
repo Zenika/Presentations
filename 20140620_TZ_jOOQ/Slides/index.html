@@ -166,25 +166,6 @@ personne.store();
                         <h1>Dans le détail</h1>
                     </section>
                     <section>
-                        <h2>C'est l'histoire d'un mec</h2>
-                        <div style="float:left; width:50%">
-                            <image src="img/lukas-eder.jpeg" alt="Lukas Eder" style="width: 200px; height: 200px"/>
-                            <p><a href="https://twitter.com/lukaseder">@lukaseder</a></p>
-                            <p><a href="http://www.datageekery.com">Data Geekery GmbH</a></p>
-                        </div>
-                        <div style="float:right; width:50%">
-                            <table class="two-columns">
-                                <tr><td>Initial commit</td><td>Oct. 2009</td></tr>
-                                <tr><td>V 1.0.0</td><td>Aout 2010 </td></tr>
-                                <tr><td>V 2.0.0</td><td>Nov. 2011 </td></tr>
-                                <tr><td>V 3.0.0</td><td>Avril 2013 </td></tr>
-                                <tr><td>V 3.2.0</td><td>Oct. 2013<br />Licence commerciale</td></tr>
-                                <tr><td>V 3.3.1</td><td>Mars 2014</td></tr>
-                            </table>
-                        </div>
-                        <div style="clear: both"></div>
-                    </section>
-                    <section>
                         <h2>Code Generator</h2>
                         <div style="width:400px; float: left">
                         <div>
@@ -294,6 +275,25 @@ personne.store();
                         <p>Annotation <code>@Support</code> sur le DSL</p>
                     </section>
                     <section>
+                        <h2>C'est l'histoire d'un mec</h2>
+                        <div style="float:left; width:50%">
+                            <image src="img/lukas-eder.jpeg" alt="Lukas Eder" style="width: 200px; height: 200px"/>
+                            <p><a href="https://twitter.com/lukaseder">@lukaseder</a></p>
+                            <p><a href="http://www.datageekery.com">Data Geekery GmbH</a></p>
+                        </div>
+                        <div style="float:right; width:50%">
+                            <table class="two-columns">
+                                <tr><td>Initial commit</td><td>Oct. 2009</td></tr>
+                                <tr><td>V 1.0.0</td><td>Aout 2010 </td></tr>
+                                <tr><td>V 2.0.0</td><td>Nov. 2011 </td></tr>
+                                <tr><td>V 3.0.0</td><td>Avril 2013 </td></tr>
+                                <tr><td>V 3.2.0</td><td>Oct. 2013<br />Licence commerciale</td></tr>
+                                <tr><td>V 3.4.0</td><td>Juin 2014</td></tr>
+                            </table>
+                        </div>
+                        <div style="clear: both"></div>
+                    </section>
+                    <section>
                         <h2>Licensing</h2>
                         <table class="table-bordered">
                             <tr><th>Open Source</th><td>ASL</td><td>pour BDD open-source</td></tr>
@@ -302,42 +302,124 @@ personne.store();
                             <tr><th>Enterprise</th><td>800/an/dev</td></tr>
                         </table>
                     </section>
+                    <section>
+                        <h2>Breaking news</h2>
+                        <div>jOOQ 3.4.0 out!</div>
+                        <ul>
+                            <li>Transactions</li>
+                            <li>DDL</li>
+                            <li>Transformation du SQL</li>
+                            <li>Common table expression (<code>WITH</code>) et récursivité</li>
+                        </ul>
+                    </section>
                 </section>
                 <section>
                     <section>
-                        <h1>Comparaison</h1>
+                        <h1>Questions?</h1>
+                    </section>
+                </section>
+                <section>
+                    <section>
+                        <h1>Annexes</h1>
                     </section>
                     <section>
-                        <h2>Hibernate</h2>
-                        <table class="two-columns" style="width:100%">
-                            <tr><th style="width:50%">Hibernate</th><th style="width:50%">jOOQ</th></tr>
-                            <tr><td>Relation</td><td></td></tr>
-                            <tr><td>Caching</td><td></td></tr>
-                            <tr><td>Communauté</td><td></td></tr>
-                            <tr><td>Intégration Spring et JEE</td><td></td></tr>
-                            <tr><td>Extensions Envers, Validation, Spatial</td><td></td></tr>
-                            <tr><td></td><td>SQL, SQL</td></tr>
-                            <tr><td>Stateful</td><td>Stateless</td></tr>
-                            <tr><td>PGCD du SQL</td><td>PPCM du SQL</td></tr>
-                            <tr><td>Code Gen.: POJO, Criteria</td><td>Code Gen.: Obligatoire</td></tr>
-                            <tr><td>100% Open-source</td><td>50% Open-source</td></tr>
+                        <h2>Ma comparaison</h2>
+                        <table style="width:100%">
+                            <tr>
+                                <th></th>
+                                <th style="width:25%">Hibernate</th>
+                                <th style="width:25%">jOOQ</th>
+                                <th style="width:25%">MyBatis</th>
+                            </tr>
+                            <tr>
+                                <td>CRUD</td>
+                                <td>***</td>
+                                <td>***</td>
+                                <td>*</td>
+                            </tr>
+                            <tr>
+                                <td>Batch</td>
+                                <td>**</td>
+                                <td>***</td>
+                                <td>*</td>
+                            </tr>
+                            <tr>
+                                <td>Dialectes</td>
+                                <td>X</td>
+                                <td>X</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>Relation</td>
+                                <td>***</td>
+                                <td>*</td>
+                                <td>**</td>
+                            </tr>
+                            <tr>
+                                <td>Caching</td>
+                                <td>X</td>
+                                <td></td>
+                                <td>X</td>
+                            </tr>
+                            <tr>
+                                <td>Communauté</td>
+                                <td>***</td>
+                                <td>*</td>
+                                <td>**</td>
+                            </tr>
+                            <tr>
+                                <td>Extensions</td>
+                                <td>Envers, Validation, Spatial</td>
+                                <td></td>
+                                <td>Migrations</td>
+                            </tr>
                         </table>
                     </section>
                     <section>
-                        <h2>MyBatis</h2>
-                        <table class="two-columns" style="width:100%">
-                            <tr><th style="width:50%">MyBatis</th><th style="width:50%">jOOQ</th></tr>
-                            <tr><td>DBA friendly</td><td></td></tr>
-                            <tr><td>Relation</td><td></td></tr>
-                            <tr><td>Caching</td><td></td></tr>
-                            <tr><td>Intégration Spring</td><td</td></tr>
-                            <tr><td>Plugin IDE</td><td</td></tr>
-                            <tr><td></td><td>CRUD</td></tr>
-                            <tr><td></td><td>Batch</td></tr>
-                            <tr><td></td><td><code>SQLDialect</code></td></tr>
-                            <tr><td>50% XML</td><td>100% Java</td></tr>
-                            <tr><td>Code Gen.: POJO, CRUD</td><td>Code Gen.: Obligatoire</td></tr>
-                            <tr><td>100% Open-source</td><td>50% Open-source</td></tr>
+                        <h2>Ma comparaison</h2>
+                        <table style="width:100%">
+                            <tr>
+                                <th></th>
+                                <th style="width:25%">Hibernate</th>
+                                <th style="width:25%">jOOQ</th>
+                                <th style="width:25%">MyBatis</th>
+                            </tr>
+                            <tr>
+                                <td>Couverture SQL</td>
+                                <td>*</td>
+                                <td>**</td>
+                                <td>***</td>
+                            </tr>
+                            <tr>
+                                <td>DBA friendly</td>
+                                <td>*</td>
+                                <td>**</td>
+                                <td>***</td>
+                            </tr>
+                            <tr>
+                                <td>Ingrédients</td>
+                                <td>33% Java, <br />33% Annotation, <br />33% JPQL</td>
+                                <td>100% Java</td>
+                                <td>50% Java, <br />50% XML</td>
+                            </tr>
+                            <tr>
+                                <td>Code Gen.</td>
+                                <td>Criteria</td>
+                                <td>Obligatoire</td>
+                                <td>CRUD</td>
+                            </tr>
+                            <tr>
+                                <td>Plugin IDE</td>
+                                <td>JPQL</td>
+                                <td></td>
+                                <td>Obligatoire</td>
+                            </tr>
+                            <tr>
+                                <td>Open-source</td>
+                                <td>100%</td>
+                                <td>50%</td>
+                                <td>100%</td>
+                            </tr>
                         </table>
                     </section>
                 </section>
