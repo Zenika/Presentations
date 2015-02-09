@@ -217,7 +217,7 @@ Mesos
   src="ressources/spark-hadoop-code.png" 
   alt="Spark simple"
   />
-<div style="position: fixed; left:50%; top:50%">
+<div style="position: relative; left:50%; top:-50%">
 
 <li>API style <em>collection</em> habituelle</li>
 <li>Spark Shell</li>
