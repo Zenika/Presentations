@@ -10,6 +10,34 @@
 
 
 
+## Rappels Hadoop
+
+
+
+### Ecosystème Hadoop
+
+![HDFS](ressources/hadoop-ecosystem.jpg)
+
+
+
+### Hadoop DFS
+
+![Architecture](ressources/hdfs-architecture.gif)
+
+
+
+### Hadoop MapReduce
+
+![Architecture](ressources/hadoop-mapreduce.png)
+
+
+
+## Ecosystème Spark
+
+![Ecosysteme Spark](ressources/spark-ecosystem.png)
+
+
+
 ## RDD
 
 * Resilient
@@ -20,10 +48,27 @@
 
 ## RDD
 
-* Liste de partitions
-* Fonction pour traiter chaque partition
-* Noeuds les plus proches d'une partition
-* RDDs parents
+![Spark RDD](ressources/spark-rdd.png)
+
+
+
+## Exemple RDD
+
+```
+val error400ByIp=sc.textFile("hdfs:///access.log") // RDD[String]
+  .map(l => AccessLog.parse(l))                    // RDD[AccessLog]
+  .filter(l => l.httpStatus==400)                  // RDD[AccessLog]
+  .keyBy(l =>  l.sourceIp)                         // RDD[String, AccessLog]
+  .countByKey()                                    // Map[String, long]
+```
+
+
+
+
+## RDD Source
+
+* Fichiers: Local, HDFS, S3
+* Base de données: Cassandra, MongoDB, ElasticSearch, JDBC
 
 
 
@@ -47,6 +92,7 @@ Declenche la soumission d'un Job.
 
 * `count`, `countByValue`, `min`, `max`
 * `first`, `take`, `collect`, `foreach`
+
 * `saveAsTextFile`, `saveAsObjectFile`
 
 
@@ -64,22 +110,43 @@ Couples (clé,valeur)
 
 
 
+## DAG
+
+![DAG](ressources/spark-dag.png)
+
+
+
 ## Caching
 
 * `cache`, `persist`
 * Memoire et/ou Disque local
 * Sérialisation ou pas
-* Off-heap <img src="ressources/tachyon-logo.png" alt="Tachyon" width="20%" style="display: inline; vertical-align: middle;"
-/> 
+* <img src="ressources/tachyon-logo.png" alt="Tachyon" width="20%" style="display: inline; vertical-align: middle;" /> 
+    - Off-heap
+    - Partagé/réutilisé entre jobs
 
 
 
+## RDD
 
-## Partititioning
+* Liste de partitions
+* Fonction pour traiter chaque partition
+* Noeuds les plus proches d'une partition
+* RDDs parents
+
+
+
+## Partitions, Tasks et Stages
+
+![Spark](ressources/spark-tasks.png)
+
+
+
+## Partitioning
 
 * A la source
-* Par clé + hashage
-
+* Par clé + hashage: `.partitionBy`, `coalesce`
+* Shuffling: `join`, `groupByKey`, `reduceByKey`
 
 
 
@@ -89,9 +156,84 @@ Couples (clé,valeur)
 
 
 
-## Ecosystème Spark
+## Cluster
 
-![Ecosysteme Spark](ressources/spark-ecosystem.png)
+![Cluster Spark](ressources/spark-cluster.png)
+
+
+
+## Cluster manager
+
+<img 
+  src="ressources/spark-logo.png" 
+  alt="Spark" width="20%" 
+  style="display: inline; vertical-align: middle;"
+  />
+Standalone 
+
+
+<img 
+  src="ressources/hadoop-logo.jpg" 
+  alt="Hadoop" width="20%" 
+  style="display: inline; vertical-align: middle;"
+  />
+YARN
+
+<img 
+  src="ressources/mesos-logo.png" 
+  alt="Mesos" width="20%" 
+  style="display: inline; vertical-align: middle;"
+  />
+Mesos
+
+
+
+## Développement
+
+* *Multi-langages:* Scala, Java, Python, R, SQL
+* *Shell:* `spark-shell`, `pyspark`, `spark-sql`
+* *Test:*
+    - Mode local
+    - De/vers les collections standards
+
+
+
+## Connecteurs
+
+* Standards: 
+    - File, HDFS, S3, JDBC
+* Extensions: 
+    - Cassandra, ElasticSearch, MongoDB...
+    - [spark-packages.org](http://spark-packages.org/)
+
+
+
+
+## Formats
+
+* Standards: 
+    - TextFile, ObjectFile, SequenceFile (K/V), Parquet (Schema), JSON (Schema)
+    - Hadoop InputFormat/OutputFormat
+* Extensions: 
+    - CSV, ProtoBuf, Avro, LZO, ...
+    - [spark-packages.org](http://spark-packages.org/)
+
+
+
+
+## Déploiement
+
+* Packaging fat Jar (Java, Scala) ou Zip (Python)
+* `spark-submit`
+    - mode: client ou cluster
+    - sizing executors
+* Spark Job Server
+
+
+
+## Demo
+
+<!-- .slide: class="page-tp3" -->
 
 
 
@@ -115,7 +257,15 @@ Couples (clé,valeur)
 
 * `select ... from ... join ... where ... group by ... order by`
 * Rule based optimizer: Catalyst 
-* Compatible HiveQL?
+* Push down
+
+
+
+## HiveQL
+
+* Syntaxe et fonctions HiveQL
+* Métastore Hive (JDBC)
+
 
 
 
@@ -156,45 +306,6 @@ Couples (clé,valeur)
 ## Demo
 
 <!-- .slide: class="page-tp2" -->
-
-
-
-## Cluster
-
-![Cluster Spark](ressources/spark-cluster.png)
-
-
-
-## Cluster manager
-
-<img 
-  src="ressources/spark-logo.png" 
-  alt="Spark" width="20%" 
-  style="display: inline; vertical-align: middle;"
-  />
-Standalone 
-
-
-<img 
-  src="ressources/hadoop-logo.jpg" 
-  alt="Hadoop" width="20%" 
-  style="display: inline; vertical-align: middle;"
-  />
-YARN
-
-<img 
-  src="ressources/mesos-logo.png" 
-  alt="Mesos" width="20%" 
-  style="display: inline; vertical-align: middle;"
-  />
-Mesos
-
-
-
-
-## Demo
-
-<!-- .slide: class="page-tp3" -->
 
 
 

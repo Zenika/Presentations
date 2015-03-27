@@ -1,5 +1,6 @@
 package com.zenika.spark.demo;
 
+import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
@@ -9,7 +10,11 @@ import org.apache.spark.api.java.JavaSparkContext;
  */
 public class Main {
     public static void main(String[] args) {
-        JavaSparkContext sc = new JavaSparkContext("local[2]","Zenika");
+        SparkConf sparkConf = new SparkConf()
+                .setMaster("spark://gqa-laptop:7077")
+                .setAppName("Zenika")
+                .set("spark.eventLog.enabled","true");
+        JavaSparkContext sc = new JavaSparkContext(sparkConf);
         // Chargement du fichier
         JavaRDD<String> logs = sc.textFile("file:///home/gquintana/Work/Veille/Presentations/20150206_TZ_Spark/Demos/access.log.1");
         System.out.println("First Logs:"+logs.first());
