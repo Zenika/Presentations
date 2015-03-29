@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Matinale Cassandra</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <style type="text/css">
+      @import url(http://fonts.googleapis.com/css?family=Roboto:400,300,400italic,700);
+      @import url(http://fonts.googleapis.com/css?family=Inconsolata);
+      body { 
+	font-family: 'Arial'; 
+	font-size: 22pt;
+      }
+      /* Rouge Zenika: rgb (179, 12, 55) */
+      h1, h2, h3 {
+	font-family: 'Roboto';
+	color: rgb(179, 12, 55);
+      }
+      .remark-slide-content {
+	font-family: 'Arial'; 
+	font-size: 22pt;
+	color: rgb(51,51,51);
+	padding: 1em 2em;
+      }
+      .remark-slide-content h1 {
+        font-weight: 300;
+        font-size: 32pt;
+      }
+      .remark-slide-content h1:before {
+	content: url(images/zenika-logo.png);
+        padding-right: 1em;
+      }
+      .remark-slide-content h2 {
+        font-weight: 400;
+        font-size: 26pt;
+      }
+      .remark-slide-content li {
+	margin-bottom: 0.2em;
+	margin-top: 0.2em;
+      }
+      .remark-slide-content strong {
+	color: rgb(179, 12, 55);
+      }
+      .remark-code, .remark-inline-code { 
+	font-family: 'Inconsolata'; 
+        font-size: 20pt;
+      }
+            /* Two-column layout */
+      .left-column {
+        width: 45%;
+        float: left;
+      }
+      .small-left-column {
+        width: 33%;
+        float: left;
+      }
+      .right-column {
+        width: 45%;
+        float: right;
+      }
+
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+
+class: center, middle
+
+# Matinale Cassandra
+## La base de données
+
+---
+
+# Agenda
+
+1. Big Data &amp; NoSQL
+2. Cassandra 
+
+---
+
+# Big Data
+
+* Variété
+* Vélocité
+* Volume
+
+---
+
+# Big Data
+
+* Haute-disponibilité &amp; Réplication
+* Distribution &amp; Partitionnement
+
+---
+
+# ACID ou BASE?
+
+.left-column[
+ACID
+* Atomicity
+* Coherence
+* Isolation
+* Durability
+]
+
+.right-column[
+BASE
+* Basically Available
+* Soft state
+* Eventual consistency
+]
+
+---
+
+# Théorème de CAP
+
+.center[
+![CAP](images/cap-ca.png)
+]
+
+---
+
+# CAP
+
+.center[
+![CAP](images/cap-database.png)
+]
+
+---
+
+# Modèles de données
+.left-column[
+Clé-Valeur
+
+Relationnel
+
+Document
+
+Colonnes
+
+Graphe
+
+Mixte
+]
+.right-column[
+![Data model](images/database-families.png)
+]
+
+---
+
+# Cassandra: les grandes lignes
+
+* Scalabilité linéaire
+* Tolérance aux pannes: masterless, 100% uptime
+* Consistance réglable
+* Multi-datacenter
+* Simplicité opérationnelle
+* Analytique
+
+---
+
+# Les origines
+
+.center[
+![CAP](images/dynamo-bigtable.png)
+]
+
+Notes:
+* Création par FaceBook
+* 
+* 2014 Version 2.1
+
+---
+
+# Plages de Tokens
+
+.right[
+![Token ranges](images/token-ranges.png)
+]
+
+---
+
+# Hachage consistant
+
+.right[
+![Consistent Hashing](images/consistent-hashing.png)
+]
+
+---
+
+# Réplication
+
+.right[
+![Replication](images/replication.png)
+]
+
+Notes:
+* Facteur de réplication
+    - Par datacenter
+    - Par keyspace
+* Pourquoi?
+    - Tolérance aux pannes
+    - Distribution de la charge
+
+---
+
+# Scalabilité 
+
+.right[
+![Token range split](images/token-range-split.png)
+]
+
+---
+
+# Scalabilité linéaire
+
+.center[
+![Scalabilité](images/netflix-scalability.png)
+]
+
+---
+
+# Niveau de consistance ALL
+
+.right[
+![Write Consistency All](images/write-consistency-all.png)
+]
+
+
+---
+
+# Niveau de consistance ONE
+
+.right[
+![Write Consistency One](images/write-consistency-one.png)
+]
+
+---
+
+# Consistance réglable:
+
+* Niveau de consistance:
+    - Par requête
+    - Gradué: ONE, TWO ... QUORUM (=RF/2+1) ... A    
+* Consistence immédiate:
+    - R + W > RF
+    - Exemple: ALL + ONE, ONE + ALL, QUORUM + QUORUM
+* Consistence au final
+    - Performance
+    - AP
+
+---
+
+# Résolution des conflits
+
+* A l'écriture: timestamp sur les cellules
+* A la lecture: *last write wins*
+
+---
+
+# Simplicité opérationnelle
+
+* Packaging: .tar, .rpm, .deb, .exe
+* Java, Python
+* 1 seul processus
+* Monitoring: nodetool, JMX, OpsCenter
+
+---
+
+# CQL
+
+```cql
+CREATE TABLE utilisateur(
+    id_utilisateur UUID,
+    login VARCHAR,
+    date_naissance TIMESTAMP,
+    roles SET<VARCHAR>,
+    PRIMARY KEY (id_utilisateur)
+);
+CREATE TABLE message(
+    id_utilisateur UUID,
+    id_message TIMEUUID,
+    message VARCHAR
+    PRIMARY KEY (id_utilisateur, id_message)
+);
+
+
+```
+
+---
+
+# Driver
+
+* Java, Python, C#, C, Ruby, NodeJS
+* Load balancing et tolérance aux pannes
+* Synchrone ou asynchrone (réactive programming)
+
+
+    </textarea>
+    <script src="js/remark-latest.min.js">
+    </script>
+    <script>
+      var slideshow = remark.create();
+    </script>
+  </body>
+</html>
