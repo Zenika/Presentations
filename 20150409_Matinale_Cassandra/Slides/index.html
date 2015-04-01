@@ -12,11 +12,11 @@
       }
       /* Rouge Zenika: rgb (179, 12, 55) */
       h1, h2, h3 {
-	font-family: 'Roboto';
+	font-family: 'Roboto' sans-serif;
 	color: rgb(179, 12, 55);
       }
       .remark-slide-content {
-	font-family: 'Arial'; 
+	font-family: 'Arial' sans-serif; 
 	font-size: 22pt;
 	color: rgb(51,51,51);
 	padding: 1em 2em;
@@ -41,8 +41,8 @@
 	color: rgb(179, 12, 55);
       }
       .remark-code, .remark-inline-code { 
-	font-family: 'Inconsolata'; 
-        font-size: 20pt;
+	font-family: 'Inconsolata' monospace; 
+        font-size: 16pt;
       }
             /* Two-column layout */
       .left-column {
@@ -66,14 +66,17 @@
 class: center, middle
 
 # Matinale Cassandra
-## La base de données
+## Sous titre?
 
 ---
 
 # Agenda
 
-1. Big Data &amp; NoSQL
-2. Cassandra 
+1. Big Data 
+2. NoSQL
+3. Architecture de Cassandra 
+4. Développer avec Cassandra
+
 
 ---
 
@@ -86,11 +89,51 @@ class: center, middle
 ---
 
 # Big Data
+ 
+* Haute-disponibilité
+    - Réplication
+    - Opérations à chaud &rarr; Distribution
+    - Election du maître?
+* Forts volumes
+    - Distribution stockage &rarr; Partitionnement
+* Performances
+    - Distribution traitements &rarr; Réplication &amp; Load balancing
+    - Chemin court vers la données
+    - Colocalisation donnée &amp; traitement
+    
+---
 
-* Haute-disponibilité &amp; Réplication
-* Distribution &amp; Partitionnement
+# SQL or NoSQL?
+
+> * Not using the relational model (nor the SQL language).
+> * Open source.
+> * Designed to run on large clusters
+> * Based on the needs of 21st century web properties
+> * No schema, allowing fields to be added to any record without controls
+> 
+> http://martinfowler.com/bliki/NosqlDefinition.html
 
 ---
+
+# Modèles de données
+.left-column[
+Clé-Valeur
+
+Relationnel
+
+Document
+
+Colonnes
+
+Graphe
+
+Mixte
+]
+.right-column[
+![Data model](images/database-families.png)
+]
+
+???
 
 # ACID ou BASE?
 
@@ -113,7 +156,12 @@ BASE
 
 # Théorème de CAP
 
-.center[
+.left-column[
+* Consistency
+* Availability
+* Partition tolerance
+]
+.right-column[
 ![CAP](images/cap-ca.png)
 ]
 
@@ -127,27 +175,7 @@ BASE
 
 ---
 
-# Modèles de données
-.left-column[
-Clé-Valeur
-
-Relationnel
-
-Document
-
-Colonnes
-
-Graphe
-
-Mixte
-]
-.right-column[
-![Data model](images/database-families.png)
-]
-
----
-
-# Cassandra: les grandes lignes
+# Cassandra en résumé
 
 * Scalabilité linéaire
 * Tolérance aux pannes: masterless, 100% uptime
@@ -164,10 +192,11 @@ Mixte
 ![CAP](images/dynamo-bigtable.png)
 ]
 
-Notes:
-* Création par FaceBook
-* 
-* 2014 Version 2.1
+???
+
+* 2008 Création par FaceBook
+* 2010 V0.6 Apache 
+* 2014 V2.1
 
 ---
 
@@ -193,8 +222,9 @@ Notes:
 ![Replication](images/replication.png)
 ]
 
-Notes:
-* Facteur de réplication
+???
+
+* Facteur de réplication (RF)
     - Par datacenter
     - Par keyspace
 * Pourquoi?
@@ -216,10 +246,44 @@ Notes:
 .center[
 ![Scalabilité](images/netflix-scalability.png)
 ]
+http://techblog.netflix.com/2011/11/benchmarking-cassandra-scalability-on.html
 
 ---
 
-# Niveau de consistance ALL
+# Multi-datacenter
+
+.left-column[
+* Node&isin;Rack&isin;Datacenter
+    - RF par Datacenter
+    - Placement des réplicas
+* Decoupage
+    - Géographique
+    - Logique
+* Cloud
+]
+.right-column[
+![Multi DataCenter](images/datacenters.png)
+]
+
+???
+
+Réplicas
+* RF par Datacenter
+* Placement des réplicas
+
+---
+
+# Simplicité opérationnelle
+
+* Packaging: .tar, .rpm, .deb, .exe
+* Java, Python
+* 1 seul processus
+* 1 seul type de noeud
+* Monitoring: nodetool, JMX, OpsCenter
+
+---
+
+# Consistance &amp; Coordinateur
 
 .right[
 ![Write Consistency All](images/write-consistency-all.png)
@@ -228,7 +292,7 @@ Notes:
 
 ---
 
-# Niveau de consistance ONE
+# Niveau de consistance ALL/ONE
 
 .right[
 ![Write Consistency One](images/write-consistency-one.png)
@@ -236,17 +300,20 @@ Notes:
 
 ---
 
-# Consistance réglable:
+# Consistance réglable
 
-* Niveau de consistance:
-    - Par requête
-    - Gradué: ONE, TWO ... QUORUM (=RF/2+1) ... A    
-* Consistence immédiate:
-    - R + W > RF
-    - Exemple: ALL + ONE, ONE + ALL, QUORUM + QUORUM
-* Consistence au final
-    - Performance
-    - AP
+* Niveau de consistance par requête
+![Consistency gradient](images/consistency-gradient.png)  
+
+.left-column[
+* Consistance immédiate 
+**R + W > RF**
+![Immediate Consistency](images/consistency-immediate.png)  
+]
+.right-column[
+* Consistance au final
+![Eventual Consistency](images/consistency-eventual.png)  
+]
 
 ---
 
@@ -257,12 +324,14 @@ Notes:
 
 ---
 
-# Simplicité opérationnelle
+# Simplicité pour le développement
 
-* Packaging: .tar, .rpm, .deb, .exe
-* Java, Python
-* 1 seul processus
-* Monitoring: nodetool, JMX, OpsCenter
+* Drivers Java, Python...
+* CQL = SQL simplifié
+* cqlsh
+* DevCenter
+* CCM, un cluster en local
+* ORM: ObjectMapper, Achilles, Spring Data Cassandra
 
 ---
 
@@ -276,15 +345,59 @@ CREATE TABLE utilisateur(
     roles SET<VARCHAR>,
     PRIMARY KEY (id_utilisateur)
 );
+
+INSERT INTO utilisateur(id_utilisateur, login, 
+    date_naissance, roles)
+  VALUES ('abc123...', 'jdoe', 
+    '1978-04-06',{'blogger','journaliste'});
+
+SELECT * FROM utilisateur 
+  WHERE id_utilisateur='abc123...';
+```
+
+---
+
+# CQL Lignes de grande taille
+
+```cql
 CREATE TABLE message(
     id_utilisateur UUID,
     id_message TIMEUUID,
-    message VARCHAR
+    message VARCHAR,
     PRIMARY KEY (id_utilisateur, id_message)
 );
 
+INSERT INTO message(id_utilisateur, id_message)
+  VALUES ('abc123...', now(),'Vive Cassandra');
 
+SELECT * FROM utilisateur 
+  WHERE id_utilisateur='abc123...';
+SELECT message FROM utilisateur 
+  WHERE id_utilisateur='abc123...' AND id_message='cde456...';
 ```
+
+---
+
+# Modèle orienté colonne
+
+* Table *utilisateur*
+![Skinny Row](images/row-skinny.png)
+* Table *message*
+![Wide Row](images/row-wide.png)
+
+* **Map**`<`RowKey, **SortedMap**`<`ColumnKey, ColumnValue`>>`
+
+---
+
+# Performance &amp; Modélisation
+
+* Pour l'écriture
+    - Append only + compaction
+    - Pas de disk seek
+* Pour la lecture
+    - Règle d'or: Dénormaliser! 
+	Besoin &rarr; Requête &rarr; Table
+    - Caches par table
 
 ---
 
