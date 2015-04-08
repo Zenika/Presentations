@@ -40,13 +40,18 @@
       .remark-slide-content strong {
 	color: rgb(179, 12, 55);
       }
+      .remark-slide-content blockquote {
+	font-style: italic;
+	border-left: solid 16px  rgb(179, 12, 55);
+	padding-left:1em;
+      }
       .remark-code, .remark-inline-code { 
 	font-family: 'Inconsolata' monospace; 
         font-size: 16pt;
       }
             /* Two-column layout */
       .left-column {
-        width: 45%;
+        width: 49%;
         float: left;
       }
       .small-left-column {
@@ -54,10 +59,9 @@
         float: left;
       }
       .right-column {
-        width: 45%;
+        width: 49%;
         float: right;
       }
-
     </style>
   </head>
   <body>
@@ -65,40 +69,53 @@
 
 class: center, middle
 
-# Matinale Cassandra
-## Sous titre?
+# Introduction à Cassandra
+## Big data &amp; NoSQL
 
 ---
 
-# Agenda
+# Objectifs
 
+.left-column[
+  ![Objectifs](images/objectifs.png)
+]
+
+.right-column[
 1. Big Data 
 2. NoSQL
 3. Architecture de Cassandra 
-4. Développer avec Cassandra
-
+4. Développer avec CQL
+]
 
 ---
 
 # Big Data
 
-* Variété
-* Vélocité
-* Volume
+> Big data is **high-volume**, **high-velocity** and **high-variety** information assets 
+> that demand cost-effective, innovative forms of information processing 
+> for enhanced insight and decision making.
+>
+> Gartner
 
 ---
 
 # Big Data
  
+* Traitements en  Batch ou Flux
+* Forts volumes
+* Performances
+* Haute-disponibilité
+
+???
+    
 * Haute-disponibilité
     - Réplication
-    - Opérations à chaud &rarr; Distribution
-    - Election du maître?
+    - Opérations à chaud
 * Forts volumes
     - Distribution stockage &rarr; Partitionnement
 * Performances
-    - Distribution traitements &rarr; Réplication &amp; Load balancing
     - Chemin court vers la données
+    - Distribution traitements &rarr; Réplication &amp; Load balancing
     - Colocalisation donnée &amp; traitement
     
 ---
@@ -117,13 +134,13 @@ class: center, middle
 
 # Modèles de données
 .left-column[
-Clé-Valeur
-
 Relationnel
+
+Clé-Valeur
 
 Document
 
-Colonnes
+Colonnes **Cassandra**
 
 Graphe
 
@@ -133,14 +150,14 @@ Mixte
 ![Data model](images/database-families.png)
 ]
 
-???
+---
 
 # ACID ou BASE?
 
 .left-column[
 ACID
 * Atomicity
-* Coherence
+* Cohérence
 * Isolation
 * Durability
 ]
@@ -154,7 +171,7 @@ BASE
 
 ---
 
-# Théorème de CAP
+# CAP
 
 .left-column[
 * Consistency
@@ -178,11 +195,13 @@ BASE
 # Cassandra en résumé
 
 * Scalabilité linéaire
-* Tolérance aux pannes: masterless, 100% uptime
+* Distribuée et masterless: pas de SPOF
+* Tolérance aux pannes: 100% uptime
+* Performances
 * Consistance réglable
 * Multi-datacenter
 * Simplicité opérationnelle
-* Analytique
+
 
 ---
 
@@ -193,26 +212,35 @@ BASE
 ]
 
 ???
-
+* 2006 Google BigTable Paper
+* 2007 Amazon Dynamo Paper
 * 2008 Création par FaceBook
-* 2010 V0.6 Apache 
+* 2010 V0.6 Apache, création DataStax
 * 2014 V2.1
 
 ---
 
-# Plages de Tokens
+# Distribution
 
+.small-left-column[
+Plage de Tokens
+]
 .right[
 ![Token ranges](images/token-ranges.png)
 ]
 
 ---
 
-# Hachage consistant
+# Distribution 
 
+.small-left-column[
+Hachage consistant
+]
 .right[
 ![Consistent Hashing](images/consistent-hashing.png)
 ]
+
+
 
 ---
 
@@ -224,9 +252,6 @@ BASE
 
 ???
 
-* Facteur de réplication (RF)
-    - Par datacenter
-    - Par keyspace
 * Pourquoi?
     - Tolérance aux pannes
     - Distribution de la charge
@@ -250,18 +275,27 @@ http://techblog.netflix.com/2011/11/benchmarking-cassandra-scalability-on.html
 
 ---
 
+# Noeuds virtuels
+
+.center[
+![Virtual nodes](images/virtual-nodes.png)
+]
+
+
+---
+
 # Multi-datacenter
 
 .left-column[
-* Node&isin;Rack&isin;Datacenter
-    - RF par Datacenter
-    - Placement des réplicas
+* Node**&isin;**Rack**&isin;**Datacenter
 * Decoupage
     - Géographique
     - Logique
 * Cloud
 ]
 .right-column[
+![Node Rack Data Center](images/node-rack-datacenter.png)
+
 ![Multi DataCenter](images/datacenters.png)
 ]
 
@@ -273,65 +307,131 @@ Réplicas
 
 ---
 
-# Simplicité opérationnelle
-
-* Packaging: .tar, .rpm, .deb, .exe
-* Java, Python
-* 1 seul processus
-* 1 seul type de noeud
-* Monitoring: nodetool, JMX, OpsCenter
-
----
-
-# Consistance &amp; Coordinateur
+# Coordinateur
 
 .right[
-![Write Consistency All](images/write-consistency-all.png)
+![Coordinator Node](images/coordinator.png)
 ]
 
 
 ---
 
-# Niveau de consistance ALL/ONE
+# Consistance ALL: Ecriture
 
+.right[
+![Write Consistency All](images/write-consistency-all.png)
+]
+
+---
+
+# Consistance ONE: Ecriture
+.small-left-column[
+Tolérance aux pannes
+
+Hinted Handoff
+]
 .right[
 ![Write Consistency One](images/write-consistency-one.png)
 ]
 
 ---
 
-# Consistance réglable
+# Consistance ALL: Lecture
 
-* Niveau de consistance par requête
-![Consistency gradient](images/consistency-gradient.png)  
+.small-left-column[
+Last write wins
 
-.left-column[
-* Consistance immédiate 
-**R + W > RF**
-![Immediate Consistency](images/consistency-immediate.png)  
+Read repair
 ]
-.right-column[
-* Consistance au final
-![Eventual Consistency](images/consistency-eventual.png)  
+
+.right[
+![Consistency read repair](images/read-consistency-all.png)  
 ]
 
 ---
 
-# Résolution des conflits
+# Consistance ONE: Lecture
 
-* A l'écriture: timestamp sur les cellules
-* A la lecture: *last write wins*
+.small-left-column[
+Eventual consistency
+]
+
+.right[
+![Consistency read repair](images/read-consistency-one.png)  
+]
+
+---
+
+# Consistance réglable
+
+Niveau de consistance par requête
+
+.center[
+![Consistency gradient](images/consistency-gradient.png)  
+]
+
+---
+
+# Consistance: le bilan
+
+.left-column[
+Consistance immédiate
+
+R + W &gt; RF
+
+![Immediate Consistency](images/consistency-immediate.png)  
+]
+
+.right-column[
+Consistance au final
+
+R + W &le; RF
+
+
+![Eventual Consistency](images/consistency-eventual.png)
+]
+
+---
+
+# Performances
+.left-column[
+* Pour l'écriture
+    - Append only + compaction
+    - Pas de disk seek
+* Pour la lecture
+    - Réplication &amp; Load balancing
+    - Modélisation adaptée &rarr; Accès direct
+    - Caches par table
+]
+.right[
+![Eventual Consistency](images/write-append-only.png)
+]
+---
+
+# Simplicité opérationnelle
+
+* Installation
+    - Linux, Java, Python
+    - Packaging: .tar, .rpm, .deb, .exe
+    - 2-3 fichiers de configuration
+    - 1 seul processus
+    - 1 seul type de noeud
+* Monitoring: 
+    - nodetool, JMX, OpsCenter
+
+???
+
+* Nagios, Sensu, Zabbix
+* Graphite, Ganglia
 
 ---
 
 # Simplicité pour le développement
 
-* Drivers Java, Python...
 * CQL = SQL simplifié
 * cqlsh
 * DevCenter
 * CCM, un cluster en local
-* ORM: ObjectMapper, Achilles, Spring Data Cassandra
 
 ---
 
@@ -357,7 +457,14 @@ SELECT * FROM utilisateur
 
 ---
 
-# CQL Lignes de grande taille
+# Modèle orienté colonne
+
+* Table *utilisateur*
+![Skinny Row](images/row-skinny.png)
+
+---
+
+# CQL Grandes lignes
 
 ```cql
 CREATE TABLE message(
@@ -389,30 +496,35 @@ SELECT message FROM utilisateur
 
 ---
 
-# Performance &amp; Modélisation
+# Modélisation
 
-* Pour l'écriture
-    - Append only + compaction
-    - Pas de disk seek
-* Pour la lecture
-    - Règle d'or: Dénormaliser! 
-	Besoin &rarr; Requête &rarr; Table
-    - Caches par table
+* Dénormaliser! 
+* Besoin **&rarr;** Requête **&rarr;** Table
+* Adapter les données aux requêtes (pas l'inverse)
 
 ---
 
 # Driver
 
-* Java, Python, C#, C, Ruby, NodeJS
-* Load balancing et tolérance aux pannes
+* ![Langages](images/langages.png)
+* Load balancing, tolérance aux pannes, découverte
 * Synchrone ou asynchrone (réactive programming)
+* Librairies Java:
+    - ORM: ObjectMapper, Achilles, Spring Data Cassandra...
+    - Test: Cassandra Unit, Stubbed Cassandra
 
+---
 
+# Questions
+
+.center[
+![Questions](images/questions.png)
+]
     </textarea>
     <script src="js/remark-latest.min.js">
     </script>
     <script>
-      var slideshow = remark.create();
+      var slideshow = remark.create({ratio: "16:9"});
     </script>
   </body>
 </html>
