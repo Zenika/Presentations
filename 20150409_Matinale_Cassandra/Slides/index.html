@@ -97,6 +97,15 @@ class: center, middle
 >
 > Gartner
 
+???
+
+* 3 Vs:
+    - Volume: noter le pléonasme, nouveaux ordres de grandeur: terraoctets, petaoctets
+    - Vélocité: fréquence de collecte, débit d'événements, volume d'émetteurs
+    - Variété: variété des sources, changements logiques, techniques et temporels
+* Les bases de données relationnelles monolithiques ne sont pas taillées pour ses nouveau besoins
+* Nouveau besoins émergent ou bien deviennent économiquement rentables
+
 ---
 
 # Big Data
@@ -115,20 +124,29 @@ class: center, middle
     - Distribution stockage &rarr; Partitionnement
 * Performances
     - Chemin court vers la données
+    - Ecritures (Flux)
     - Distribution traitements &rarr; Réplication &amp; Load balancing
-    - Colocalisation donnée &amp; traitement
+    - Colocalisation donnée &amp; traitement    
     
 ---
 
 # SQL or NoSQL?
 
-> * Not using the relational model (nor the SQL language).
+> * Not using the **relational model** (nor the SQL language).
 > * Open source.
 > * Designed to run on large clusters
 > * Based on the needs of 21st century web properties
 > * No schema, allowing fields to be added to any record without controls
 > 
 > http://martinfowler.com/bliki/NosqlDefinition.html
+
+???
+* Relever les lacunes de cette définition
+* Opposition aux SGBDR: 
+    - Modèle de données
+    - Monolithique / distribué
+    - Cas d'utilisation
+* Le mot NoSQL a été choisi pour le hashtag
 
 ---
 
@@ -150,6 +168,15 @@ Mixte
 ![Data model](images/database-families.png)
 ]
 
+???
+
+* Produits
+  - Clé-valeur: Redis, Riak
+  - Document: MongoDB, MarkLogic
+  - Colonne: HBase, Cassandra
+  - Graphe: Neo4J, TitanDB
+  - Mixte: ArangoDB, OrientDB
+
 ---
 
 # ACID ou BASE?
@@ -169,6 +196,10 @@ BASE
 * Eventual consistency
 ]
 
+???
+
+* Relever qu'il manque un élément à la définition de NoSQL: la consistance affaiblie
+
 ---
 
 # CAP
@@ -182,6 +213,15 @@ BASE
 ![CAP](images/cap-ca.png)
 ]
 
+???
+
+* Commencer par définir
+  - Consistency: all nodes see the same data at the same time
+  - Availability: a guarantee that every request receives a response about whether it succeeded or failed
+  - Partition tolerance: the system continues to operate despite arbitrary message loss or failure of part of the system
+* Puis présenter le théorème/conjecture et ses auteurs: Eric Brewer, Nancy Lynch
+* Enfin expliquer pourquoi on ne peut pas avoir les 3
+
 ---
 
 # CAP
@@ -194,8 +234,9 @@ BASE
 
 # Cassandra en résumé
 
+* Distribuée
+* Masterless: pas de SPOF
 * Scalabilité linéaire
-* Distribuée et masterless: pas de SPOF
 * Tolérance aux pannes: 100% uptime
 * Performances
 * Consistance réglable
@@ -212,6 +253,7 @@ BASE
 ]
 
 ???
+
 * 2006 Google BigTable Paper
 * 2007 Amazon Dynamo Paper
 * 2008 Création par FaceBook
@@ -229,6 +271,11 @@ Plage de Tokens
 ![Token ranges](images/token-ranges.png)
 ]
 
+???
+
+* Token: entier 128bits
+* Plage de tokens: disjointes et contigües
+
 ---
 
 # Distribution 
@@ -240,7 +287,12 @@ Hachage consistant
 ![Consistent Hashing](images/consistent-hashing.png)
 ]
 
+???
 
+* Elements:
+    - Partition key
+    - Partitioner
+    - Token
 
 ---
 
@@ -273,6 +325,10 @@ Hachage consistant
 ]
 http://techblog.netflix.com/2011/11/benchmarking-cassandra-scalability-on.html
 
+???
+
+* Ajouter/enlever des noeuds en fonction des besoins, adapter la taille en fonction de la charge
+
 ---
 
 # Noeuds virtuels
@@ -281,6 +337,9 @@ http://techblog.netflix.com/2011/11/benchmarking-cassandra-scalability-on.html
 ![Virtual nodes](images/virtual-nodes.png)
 ]
 
+???
+
+* Depuis Cassandra 1.2
 
 ---
 
@@ -301,9 +360,12 @@ http://techblog.netflix.com/2011/11/benchmarking-cassandra-scalability-on.html
 
 ???
 
-Réplicas
-* RF par Datacenter
-* Placement des réplicas
+* Organisation:
+    - Rack: Placement des réplicas
+    - Datacenter: Placement des réplicas + Facteur de réplication
+* Cloud: 
+    - Public: Google, Amazon
+    - Privé: CloudStack
 
 ---
 
@@ -313,14 +375,25 @@ Réplicas
 ![Coordinator Node](images/coordinator.png)
 ]
 
+???
+
+* Different d'un master
+* Load balancing et failover
 
 ---
 
 # Consistance ALL: Ecriture
-
+.small-left-column[
+Timestamp par cellule
+]
 .right[
 ![Write Consistency All](images/write-consistency-all.png)
 ]
+
+???
+
+* Parler d'abord l'écriture et après seulement de la consistance (en cas de panne)
+* Risque d'erreur plus élevé en cas de multi-datacenter ou avec RF élevé
 
 ---
 
@@ -370,6 +443,11 @@ Niveau de consistance par requête
 ![Consistency gradient](images/consistency-gradient.png)  
 ]
 
+???
+
+* Evoquer les niveau spéciques LOCAL_*, EACH_*
+* Revenir sur CAP
+
 ---
 
 # Consistance: le bilan
@@ -389,11 +467,17 @@ R + W &le; RF
 
 
 ![Eventual Consistency](images/consistency-eventual.png)
+
 ]
+
+???
+
+* Consistance de l'ordre la milliseconde
 
 ---
 
 # Performances
+
 .left-column[
 * Pour l'écriture
     - Append only + compaction
@@ -406,23 +490,25 @@ R + W &le; RF
 .right[
 ![Eventual Consistency](images/write-append-only.png)
 ]
+
 ---
 
 # Simplicité opérationnelle
 
 * Installation
-    - Linux, Java, Python
+    - Linux, Java, Python, NTP
     - Packaging: .tar, .rpm, .deb, .exe
     - 2-3 fichiers de configuration
     - 1 seul processus
     - 1 seul type de noeud
-* Monitoring: 
+* Monitoring
     - nodetool, JMX, OpsCenter
 
 ???
 
-* Nagios, Sensu, Zabbix
-* Graphite, Ganglia
+* Monitoring JMX
+    - Nagios, Sensu, Zabbix
+    - Graphite, Ganglia
 
 ---
 
@@ -455,6 +541,14 @@ SELECT * FROM utilisateur
   WHERE id_utilisateur='abc123...';
 ```
 
+???
+
+* Montrer la ressemblance avec SQL
+* Montrer les différences avec SQL:
+    - Types collection
+    - Insert = Update
+    - Requête select possibles, critères, jointures &rarr; SolR
+    - Requête select analytiques (group by, average) &rarr; Spark
 ---
 
 # Modèle orienté colonne
@@ -510,8 +604,8 @@ SELECT message FROM utilisateur
 * Load balancing, tolérance aux pannes, découverte
 * Synchrone ou asynchrone (réactive programming)
 * Librairies Java:
-    - ORM: ObjectMapper, Achilles, Spring Data Cassandra...
-    - Test: Cassandra Unit, Stubbed Cassandra
+    - ObjectMapper, Achilles, Spring Data Cassandra...
+    - Cassandra Unit, Stubbed Cassandra
 
 ---
 
