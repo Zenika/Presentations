@@ -1,0 +1,34 @@
+<div id="main-content" allowfullscreen='true' mozallowfullscreen='true' >
+    <div ng-show="compatibility.webSockets">
+        <!-- Main Action Bar -->
+        <action-bar></action-bar>           
+        
+        <!-- Menu -->
+        <sliding-menu></sliding-menu>           
+        
+        <!-- Time Loader part -->
+        <!--<timer></timer>-->
+
+        <!-- Notes -->
+        <notes></notes>
+        
+        <!-- Plugin Area -->
+        <div id="sws-plugins-area" ng-show="ui.showPlugin">
+            <div id="sws-plugins-area-content">
+                <div class="sws-plugin-ctrl" ng-repeat="plugin in model.pluginList | filter:activeFilter" id="sws-plugin-ctrl-{{plugin.id}}" ng-show='ui.showPluginCtrl[plugin.id]'></div>      
+            </div>
+            <div id="sws-box-close" sws-color="black" class="sws-plugin-box fa fa-times" ng-click='hidePlugin()' ></div>
+        </div>
+
+        <!--  Preview -->
+        <div id="preview" class="border">
+            <div id="wrap-next-slide" class="slides" iframe-control>
+                <iframe width="100%" height="100%" id="next-slide" src=""></iframe>
+                <controls></controls>
+            </div>               			
+        </div>
+    </div>
+    <div ng-hide="compatibility.webSockets">
+        You have to use a modern browser for this application
+    </div>
+</div>

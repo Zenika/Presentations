@@ -1,0 +1,206 @@
+@import "colors";
+@import "vars";
+@import "nav";
+@import "notes";
+@import "actionbar";
+@import "fonts";
+@import "sliding-menu";
+@import "plugins";
+
+    
+/***
+ *       _____ ____  __  __ __  __  ____  _   _        _____  _____   ____  _____  ______ _____ _______ _____ ______  _____ 
+ *      / ____/ __ \|  \/  |  \/  |/ __ \| \ | |      |  __ \|  __ \ / __ \|  __ \|  ____|  __ \__   __|_   _|  ____|/ ____|
+ *     | |   | |  | | \  / | \  / | |  | |  \| |      | |__) | |__) | |  | | |__) | |__  | |__) | | |    | | | |__  | (___  
+ *     | |   | |  | | |\/| | |\/| | |  | | . ` |      |  ___/|  _  /| |  | |  ___/|  __| |  _  /  | |    | | |  __|  \___ \ 
+ *     | |___| |__| | |  | | |  | | |__| | |\  |      | |    | | \ \| |__| | |    | |____| | \ \  | |   _| |_| |____ ____) |
+ *      \_____\____/|_|  |_|_|  |_|\____/|_| \_|      |_|    |_|  \_\\____/|_|    |______|_|  \_\ |_|  |_____|______|_____/ 
+ *                                                                                                                          
+ *                                                                                                                          
+ */
+body {
+    height:100%;
+    background-color:$bg-color;
+    color : $font-color;
+}
+
+@mixin fullScreenConf{
+    background-color: $bg-color;
+    height: 100%;
+    width: 100%;
+}
+
+#main-content:-webkit-full-screen{
+    @include fullScreenConf;
+}
+#main-content:fullscreen{
+    @include fullScreenConf;
+}
+#main-content:-moz-full-screen {
+    @include fullScreenConf;
+}
+
+
+.border{
+    border-style:solid;
+    border-width:0px;
+    position: absolute;    
+    background-color:$panel-color;
+    margin-left:$margin;
+    margin-right:$margin;
+}
+
+/***
+ *      __  __          _____ _   _      _____ _____  _____ _____   ____   _____ _____ _______ _____ ____  _   _ 
+ *     |  \/  |   /\   |_   _| \ | |    |  __ \_   _|/ ____|  __ \ / __ \ / ____|_   _|__   __|_   _/ __ \| \ | |
+ *     | \  / |  /  \    | | |  \| |    | |  | || | | (___ | |__) | |  | | (___   | |    | |    | || |  | |  \| |
+ *     | |\/| | / /\ \   | | | . ` |    | |  | || |  \___ \|  ___/| |  | |\___ \  | |    | |    | || |  | | . ` |
+ *     | |  | |/ ____ \ _| |_| |\  |    | |__| || |_ ____) | |    | |__| |____) |_| |_   | |   _| || |__| | |\  |
+ *     |_|  |_/_/    \_\_____|_| \_|    |_____/_____|_____/|_|     \____/|_____/|_____|  |_|  |_____\____/|_| \_|
+ *                                                                                                               
+ *                                                                                                               
+ */
+
+ $height-content-portrait : calc( (100% - #{$abs-height} - (2 * #{$margin}) - (2 * #{$margin-timer})) / 2) ;    
+ $height-content-portrait-safari : -webkit-calc( (100% - #{$abs-height} - (2 * #{$margin}) - (2 * #{$margin-timer})) / 2) ;    
+ $height-content-landscape : calc(100% - #{$abs-height} - #{$margin} - (2 * #{$margin-timer})) ;    
+ $height-content-landscape-safari : -webkit-calc(100% - #{$abs-height} - #{$margin} - (2 * #{$margin-timer})) ;    
+ $bottom-portrait : calc(#{$margin} + (100% - #{$abs-height} - (2 * #{$margin}) - (2 * #{$margin-timer})) / 2) ;    
+ $bottom-portrait-safari : -webkit-calc(#{$margin} + (100% - #{$abs-height} - (2 * #{$margin}) - (2 * #{$margin-timer})) / 2) ;    
+ $bottom-landscape : calc(#{$margin} + 100% - #{$abs-height} - #{$margin} - (2 * #{$margin-timer})) ;    
+ $bottom-landscape-safari : -webkit-calc(#{$margin} + 100% - #{$abs-height} - #{$margin} - (2 * #{$margin-timer})) ;    
+
+#notes, #time, #preview{
+    position: absolute;
+    width:calc(100% - (#{$margin} * 2));
+    width:-webkit-calc(100% - (#{$margin} * 2));
+    left:0;
+}
+
+#notes {    
+    height: $height-content-portrait;
+    height: $height-content-portrait-safari;
+    top: calc( #{$abs-height} + (2 * #{$margin-timer}));
+    top: -webkit-calc( #{$abs-height} + (2 * #{$margin-timer}));
+}
+
+#notes.fullSize{
+    height: calc(100% - #{$abs-height} - #{$margin} - (2 * #{$margin-timer})) ;    
+    height: -webkit-calc(100% - #{$abs-height} - #{$margin} - (2 * #{$margin-timer})) ;    
+    z-index:50;
+}
+
+#notes.upPlugin{
+    top: calc( #{$abs-height} + (2 * #{$margin-timer}) - #{$pluginHeight});
+    top: -webkit-calc( #{$abs-height} + (2 * #{$margin-timer}) - #{$pluginHeight});
+}
+
+
+#preview{
+    margin-bottom: $margin;    
+    height: $height-content-portrait;
+    height: $height-content-portrait-safari;
+    bottom:0;
+    @include shadow;
+}
+
+
+#sws-plugins-area{
+    position: absolute;
+    width: 100%;
+    left: 0;
+    height: $pluginHeight;
+    bottom:  $bottom-portrait;
+    bottom:  $bottom-portrait-safari;
+}
+
+@media screen and (orientation:landscape){
+    #notes{
+        width:calc(30% - #{$margin} - #{$margin});        
+        width:-webkit-calc(30% - #{$margin} - #{$margin});        
+        left:0;
+        height:$height-content-landscape; 
+        height:$height-content-landscape-safari; 
+    }    
+
+    #notes.fullSize{
+        width:calc(100% - (2 * #{$margin}));
+        width:-webkit-calc(100% - (2 * #{$margin}));
+    }
+    
+    #preview{
+        width:calc(70% - #{$margin} - #{$margin});
+        width:-webkit-calc(70% - #{$margin} - #{$margin});
+        height:$height-content-landscape;
+        height:$height-content-landscape-safari;
+        top: calc( #{$abs-height} + (2 * #{$margin-timer}));
+        top: -webkit-calc( #{$abs-height} + (2 * #{$margin-timer}));
+        bottom:0;
+        left:30%;
+    }   
+
+    #sws-plugins-area{
+        width:calc(30% - #{$margin} - #{$margin});        
+        width:-webkit-calc(30% - #{$margin} - #{$margin});        
+        bottom:  $bottom-landscape;
+        bottom:  $bottom-landscape-safari;
+    }
+}
+
+
+/***
+ *      _____  _____  ________      _______ ________          __
+ *     |  __ \|  __ \|  ____\ \    / /_   _|  ____\ \        / /
+ *     | |__) | |__) | |__   \ \  / /  | | | |__   \ \  /\  / / 
+ *     |  ___/|  _  /|  __|   \ \/ /   | | |  __|   \ \/  \/ /  
+ *     | |    | | \ \| |____   \  /   _| |_| |____   \  /\  /   
+ *     |_|    |_|  \_\______|   \/   |_____|______|   \/  \/    
+ *                                                              
+ *                                                              
+ */
+
+#wrap-next-slide {
+    position:absolute;
+    width: 100%;
+    height: 100%;    
+}
+
+.slides {
+    position: relative;
+    margin-bottom: $margin;
+    border: 1px solid black;
+    border-radius: 2px;
+    background: rgb(28, 30, 32);
+}
+
+.slides span {
+    /*position: absolute;*/
+    top: 3px;
+    left: 3px;
+    font-weight: bold;
+    font-size: 14px;
+/*    color: rgba( 255, 255, 255, 0.9 );*/
+}
+
+.error {
+    font-weight: bold;
+    color: red;
+    font-size: 1.5em;
+    text-align: center;
+    margin-top: 10%;
+}
+
+.error code {
+    font-family: monospace;
+}
+
+iframe{
+    border:none;
+}
+
+
+
+
+
+
+
