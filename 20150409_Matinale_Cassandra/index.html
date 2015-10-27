@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Matinale Cassandra</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <style type="text/css">
+      @import url(http://fonts.googleapis.com/css?family=Roboto:400,300,400italic,700);
+      @import url(http://fonts.googleapis.com/css?family=Inconsolata);
+      body { 
+	font-family: 'Arial'; 
+	font-size: 22pt;
+      }
+      /* Rouge Zenika: rgb (179, 12, 55) */
+      h1, h2, h3 {
+	font-family: 'Roboto' sans-serif;
+	color: rgb(179, 12, 55);
+      }
+      .remark-slide-content {
+	font-family: 'Arial' sans-serif; 
+	font-size: 22pt;
+	color: rgb(51,51,51);
+	padding: 1em 2em;
+      }
+      .remark-slide-content h1 {
+        font-weight: 300;
+        font-size: 32pt;
+      }
+      .remark-slide-content h1:before {
+	content: url(images/zenika-logo.png);
+        padding-right: 1em;
+      }
+      .remark-slide-content h2 {
+        font-weight: 400;
+        font-size: 26pt;
+      }
+      .remark-slide-content li {
+	margin-bottom: 0.2em;
+	margin-top: 0.2em;
+      }
+      .remark-slide-content strong {
+	color: rgb(179, 12, 55);
+      }
+      .remark-slide-content blockquote {
+	font-style: italic;
+	border-left: solid 16px  rgb(179, 12, 55);
+	padding-left:1em;
+      }
+      .remark-code, .remark-inline-code { 
+	font-family: 'Inconsolata' monospace; 
+        font-size: 16pt;
+      }
+            /* Two-column layout */
+      .left-column {
+        width: 49%;
+        float: left;
+      }
+      .small-left-column {
+        width: 33%;
+        float: left;
+      }
+      .right-column {
+        width: 49%;
+        float: right;
+      }
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+
+class: center, middle
+
+# Introduction à Cassandra
+## Big data &amp; NoSQL
+
+---
+
+# Objectifs
+
+.left-column[
+  ![Objectifs](images/objectifs.png)
+]
+
+.right-column[
+1. Big Data 
+2. NoSQL
+3. Architecture de Cassandra 
+4. Développer avec CQL
+]
+
+---
+
+# Big Data
+
+> Big data is **high-volume**, **high-velocity** and **high-variety** information assets 
+> that demand cost-effective, innovative forms of information processing 
+> for enhanced insight and decision making.
+>
+> Gartner
+
+???
+
+* 3 Vs:
+    - Volume: noter le pléonasme, nouveaux ordres de grandeur: terraoctets, petaoctets
+    - Vélocité: fréquence de collecte, débit d'événements, volume d'émetteurs
+    - Variété: variété des sources, changements logiques, techniques et temporels
+* Les bases de données relationnelles monolithiques ne sont pas taillées pour ses nouveau besoins
+* Nouveau besoins émergent ou bien deviennent économiquement rentables
+
+---
+
+# Big Data
+ 
+* Traitements en  Batch ou Flux
+* Forts volumes
+* Performances
+* Haute-disponibilité
+
+???
+    
+* Haute-disponibilité
+    - Réplication
+    - Opérations à chaud
+* Forts volumes
+    - Distribution stockage &rarr; Partitionnement
+* Performances
+    - Chemin court vers la données
+    - Ecritures (Flux)
+    - Distribution traitements &rarr; Réplication &amp; Load balancing
+    - Colocalisation donnée &amp; traitement    
+    
+---
+
+# SQL or NoSQL?
+
+> * Not using the **relational model** (nor the SQL language).
+> * Open source.
+> * Designed to run on large clusters
+> * Based on the needs of 21st century web properties
+> * No schema, allowing fields to be added to any record without controls
+> 
+> http://martinfowler.com/bliki/NosqlDefinition.html
+
+???
+* Relever les lacunes de cette définition
+* Opposition aux SGBDR: 
+    - Modèle de données
+    - Monolithique / distribué
+    - Cas d'utilisation
+* Le mot NoSQL a été choisi pour le hashtag
+
+---
+
+# Modèles de données
+.left-column[
+Relationnel
+
+Clé-Valeur
+
+Document
+
+Colonnes **Cassandra**
+
+Graphe
+
+Mixte
+]
+.right-column[
+![Data model](images/database-families.png)
+]
+
+???
+
+* Produits
+  - Clé-valeur: Redis, Riak
+  - Document: MongoDB, MarkLogic
+  - Colonne: HBase, Cassandra
+  - Graphe: Neo4J, TitanDB
+  - Mixte: ArangoDB, OrientDB
+
+---
+
+# ACID ou BASE?
+
+.left-column[
+ACID
+* Atomicity
+* Cohérence
+* Isolation
+* Durability
+]
+
+.right-column[
+BASE
+* Basically Available
+* Soft state
+* Eventual consistency
+]
+
+???
+
+* Relever qu'il manque un élément à la définition de NoSQL: la consistance affaiblie
+
+---
+
+# CAP
+
+.left-column[
+* Consistency
+* Availability
+* Partition tolerance
+]
+.right-column[
+![CAP](images/cap-ca.png)
+]
+
+???
+
+* Commencer par définir
+  - Consistency: all nodes see the same data at the same time
+  - Availability: a guarantee that every request receives a response about whether it succeeded or failed
+  - Partition tolerance: the system continues to operate despite arbitrary message loss or failure of part of the system
+* Puis présenter le théorème/conjecture et ses auteurs: Eric Brewer, Nancy Lynch
+* Enfin expliquer pourquoi on ne peut pas avoir les 3
+
+---
+
+# CAP
+
+.center[
+![CAP](images/cap-database.png)
+]
+
+---
+
+# Cassandra en résumé
+
+* Distribuée
+* Masterless: pas de SPOF
+* Scalabilité linéaire
+* Tolérance aux pannes: 100% uptime
+* Performances
+* Consistance réglable
+* Multi-datacenter
+* Simplicité opérationnelle
+
+
+---
+
+# Les origines
+
+.center[
+![CAP](images/dynamo-bigtable.png)
+]
+
+???
+
+* 2006 Google BigTable Paper
+* 2007 Amazon Dynamo Paper
+* 2008 Création par FaceBook
+* 2010 V0.6 Apache, création DataStax
+* 2014 V2.1
+
+---
+
+# Distribution
+
+.small-left-column[
+Plage de Tokens
+]
+.right[
+![Token ranges](images/token-ranges.png)
+]
+
+???
+
+* Token: entier 128bits
+* Plage de tokens: disjointes et contigües
+
+---
+
+# Distribution 
+
+.small-left-column[
+Hachage consistant
+]
+.right[
+![Consistent Hashing](images/consistent-hashing.png)
+]
+
+???
+
+* Elements:
+    - Partition key
+    - Partitioner
+    - Token
+
+---
+
+# Réplication
+
+.right[
+![Replication](images/replication.png)
+]
+
+???
+
+* Pourquoi?
+    - Tolérance aux pannes
+    - Distribution de la charge
+
+---
+
+# Scalabilité 
+
+.right[
+![Token range split](images/token-range-split.png)
+]
+
+---
+
+# Scalabilité linéaire
+
+.center[
+![Scalabilité](images/netflix-scalability.png)
+]
+http://techblog.netflix.com/2011/11/benchmarking-cassandra-scalability-on.html
+
+???
+
+* Ajouter/enlever des noeuds en fonction des besoins, adapter la taille en fonction de la charge
+
+---
+
+# Noeuds virtuels
+
+.center[
+![Virtual nodes](images/virtual-nodes.png)
+]
+
+???
+
+* Depuis Cassandra 1.2
+
+---
+
+# Multi-datacenter
+
+.left-column[
+* Node**&isin;**Rack**&isin;**Datacenter
+* Decoupage
+    - Géographique
+    - Logique
+* Cloud
+]
+.right-column[
+![Node Rack Data Center](images/node-rack-datacenter.png)
+
+![Multi DataCenter](images/datacenters.png)
+]
+
+???
+
+* Organisation:
+    - Rack: Placement des réplicas
+    - Datacenter: Placement des réplicas + Facteur de réplication
+* Cloud: 
+    - Public: Google, Amazon
+    - Privé: CloudStack
+
+---
+
+# Coordinateur
+
+.right[
+![Coordinator Node](images/coordinator.png)
+]
+
+???
+
+* Different d'un master
+* Load balancing et failover
+
+---
+
+# Consistance ALL: Ecriture
+.small-left-column[
+Timestamp par cellule
+]
+.right[
+![Write Consistency All](images/write-consistency-all.png)
+]
+
+???
+
+* Parler d'abord l'écriture et après seulement de la consistance (en cas de panne)
+* Risque d'erreur plus élevé en cas de multi-datacenter ou avec RF élevé
+
+---
+
+# Consistance ONE: Ecriture
+.small-left-column[
+Tolérance aux pannes
+
+Hinted Handoff
+]
+.right[
+![Write Consistency One](images/write-consistency-one.png)
+]
+
+---
+
+# Consistance ALL: Lecture
+
+.small-left-column[
+Last write wins
+
+Read repair
+]
+
+.right[
+![Consistency read repair](images/read-consistency-all.png)  
+]
+
+---
+
+# Consistance ONE: Lecture
+
+.small-left-column[
+Eventual consistency
+]
+
+.right[
+![Consistency read repair](images/read-consistency-one.png)  
+]
+
+---
+
+# Consistance réglable
+
+Niveau de consistance par requête
+
+.center[
+![Consistency gradient](images/consistency-gradient.png)  
+]
+
+???
+
+* Evoquer les niveau spéciques LOCAL_*, EACH_*
+* Revenir sur CAP
+
+---
+
+# Consistance: le bilan
+
+.left-column[
+Consistance immédiate
+
+R + W &gt; RF
+
+![Immediate Consistency](images/consistency-immediate.png)  
+]
+
+.right-column[
+Consistance au final
+
+R + W &le; RF
+
+
+![Eventual Consistency](images/consistency-eventual.png)
+
+]
+
+???
+
+* Consistance de l'ordre la milliseconde
+
+---
+
+# Performances
+
+.left-column[
+* Pour l'écriture
+    - Append only + compaction
+    - Pas de disk seek
+* Pour la lecture
+    - Réplication &amp; Load balancing
+    - Modélisation adaptée &rarr; Accès direct
+    - Caches par table
+]
+.right[
+![Eventual Consistency](images/write-append-only.png)
+]
+
+---
+
+# Simplicité opérationnelle
+
+* Installation
+    - Linux, Java, Python, NTP
+    - Packaging: .tar, .rpm, .deb, .exe
+    - 2-3 fichiers de configuration
+    - 1 seul processus
+    - 1 seul type de noeud
+* Monitoring
+    - nodetool, JMX, OpsCenter
+
+???
+
+* Monitoring JMX
+    - Nagios, Sensu, Zabbix
+    - Graphite, Ganglia
+
+---
+
+# Simplicité pour le développement
+
+* CQL = SQL simplifié
+* cqlsh
+* DevCenter
+* CCM, un cluster en local
+
+---
+
+# CQL
+
+```cql
+CREATE TABLE utilisateur(
+    id_utilisateur UUID,
+    login VARCHAR,
+    date_naissance TIMESTAMP,
+    roles SET<VARCHAR>,
+    PRIMARY KEY (id_utilisateur)
+);
+
+INSERT INTO utilisateur(id_utilisateur, login, 
+    date_naissance, roles)
+  VALUES ('abc123...', 'jdoe', 
+    '1978-04-06',{'blogger','journaliste'});
+
+SELECT * FROM utilisateur 
+  WHERE id_utilisateur='abc123...';
+```
+
+???
+
+* Montrer la ressemblance avec SQL
+* Montrer les différences avec SQL:
+    - Types collection
+    - Insert = Update
+    - Requête select possibles, critères, jointures &rarr; SolR
+    - Requête select analytiques (group by, average) &rarr; Spark
+---
+
+# Modèle orienté colonne
+
+* Table *utilisateur*
+![Skinny Row](images/row-skinny.png)
+
+---
+
+# CQL Grandes lignes
+
+```cql
+CREATE TABLE message(
+    id_utilisateur UUID,
+    id_message TIMEUUID,
+    message VARCHAR,
+    PRIMARY KEY (id_utilisateur, id_message)
+);
+
+INSERT INTO message(id_utilisateur, id_message)
+  VALUES ('abc123...', now(),'Vive Cassandra');
+
+SELECT * FROM utilisateur 
+  WHERE id_utilisateur='abc123...';
+SELECT message FROM utilisateur 
+  WHERE id_utilisateur='abc123...' AND id_message='cde456...';
+```
+
+---
+
+# Modèle orienté colonne
+
+* Table *utilisateur*
+![Skinny Row](images/row-skinny.png)
+* Table *message*
+![Wide Row](images/row-wide.png)
+
+* **Map**`<`RowKey, **SortedMap**`<`ColumnKey, ColumnValue`>>`
+
+---
+
+# Modélisation
+
+* Dénormaliser! 
+* Besoin **&rarr;** Requête **&rarr;** Table
+* Adapter les données aux requêtes (pas l'inverse)
+
+---
+
+# Driver
+
+* ![Langages](images/langages.png)
+* Load balancing, tolérance aux pannes, découverte
+* Synchrone ou asynchrone (réactive programming)
+* Librairies Java:
+    - ObjectMapper, Achilles, Spring Data Cassandra...
+    - Cassandra Unit, Stubbed Cassandra
+
+---
+
+# Questions
+
+.center[
+![Questions](images/questions.png)
+]
+    </textarea>
+    <script src="js/remark-latest.min.js">
+    </script>
+    <script>
+      var slideshow = remark.create({ratio: "16:9"});
+    </script>
+  </body>
+</html>
